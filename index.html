@@ -4,497 +4,402 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin — Club GlobalVet</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f2f4f9;--white:#fff;--dark:#12103a;--purple:#4f35b3;--purple2:#6c4fd6;
-      --plight:#ede9ff;--teal:#0a7c6e;--green:#1e8a50;--red:#d94040;--gold:#e8a020;
-      --muted:#6b7280;--line:#e5e7eb;
-      --ff:'Space Grotesk',system-ui,sans-serif;--ffb:'DM Sans',system-ui,sans-serif;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:var(--ffb);background:var(--bg);color:var(--dark);line-height:1.55}
-    a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:var(--ffb)}
-    input,select,textarea{font-family:var(--ffb)}
+    :root{--bg:#f2f4f9;--w:#fff;--dk:#12103a;--pu:#4f35b3;--pu2:#6c4fd6;--pl:#ede9ff;
+      --te:#0a7c6e;--gr:#1e8a50;--re:#d94040;--go:#e8a020;--mu:#6b7280;--li:#e5e7eb;
+      --ff:'Space Grotesk',sans-serif;--fb:'DM Sans',sans-serif;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--fb);background:var(--bg);color:var(--dk)}
+    button,input,select,textarea{font-family:var(--fb);cursor:pointer}
 
-    /* ===== LOGIN ===== */
-    #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;
-      background:radial-gradient(ellipse at 60% 0%,rgba(95,69,200,.18) 0%,transparent 55%),
-                 radial-gradient(ellipse at 0% 80%,rgba(59,43,134,.12) 0%,transparent 50%),
-                 linear-gradient(180deg,#eceeff 0%,#f2f4f9 100%);padding:1rem;}
-    .lcard{background:#fff;border-radius:24px;padding:2.4rem 2.2rem;width:100%;max-width:400px;
-      box-shadow:0 24px 60px rgba(18,16,58,.12);}
-    .lbrand{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:1.5rem}
-    .lbrand-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--dark),var(--purple));
-      border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
-    .lbrand-name{font-family:var(--ff);font-size:1rem;font-weight:700}
-    .ltitle{font-family:var(--ff);font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:.25rem}
-    .lsub{font-size:.83rem;color:var(--muted);text-align:center;margin-bottom:1.6rem}
-    .lerr{background:#fff0f0;border:1px solid #fecaca;border-radius:10px;padding:.65rem .9rem;
-      font-size:.83rem;color:var(--red);margin-bottom:.8rem;display:none}
-    .lerr.show{display:block}
-    .lfield{margin-bottom:.9rem}
-    .llbl{font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-      color:var(--muted);display:block;margin-bottom:.35rem}
-    .linput{width:100%;padding:.72rem .95rem;background:#f8fbff;border:1.5px solid var(--line);
-      border-radius:12px;font-size:.9rem;color:var(--dark);outline:none;transition:border-color .2s}
-    .linput:focus{border-color:var(--purple)}
-    .lbtn{width:100%;padding:.88rem;background:var(--dark);color:#fff;font-family:var(--ff);
-      font-weight:700;font-size:.95rem;border:none;border-radius:14px;cursor:pointer;transition:opacity .15s}
+    /* LOGIN */
+    #L{min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:radial-gradient(ellipse at 65% 0%,rgba(95,69,200,.2),transparent 52%),
+      radial-gradient(ellipse at 0% 90%,rgba(59,43,134,.15),transparent 48%),
+      linear-gradient(175deg,#eceeff,#f2f4f9);padding:1rem}
+    .lc{background:#fff;border-radius:24px;padding:2.4rem 2.2rem;width:100%;max-width:400px;
+      box-shadow:0 24px 60px rgba(18,16,58,.13)}
+    .lb{display:flex;align-items:center;justify-content:center;gap:.65rem;margin-bottom:1.5rem}
+    .lb-ico{width:44px;height:44px;background:linear-gradient(135deg,var(--dk),var(--pu));
+      border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+    .lb-nm{font-family:var(--ff);font-size:1rem;font-weight:700}
+    .lt{font-family:var(--ff);font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:.25rem}
+    .ls{font-size:.83rem;color:var(--mu);text-align:center;margin-bottom:1.6rem}
+    .le{background:#fff0f0;border:1px solid #fecaca;border-radius:10px;padding:.65rem .9rem;
+      font-size:.83rem;color:var(--re);margin-bottom:.8rem;display:none}
+    .le.show{display:block}
+    .lf{margin-bottom:.9rem}
+    .ll{font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--mu);display:block;margin-bottom:.35rem}
+    .li{width:100%;padding:.72rem .95rem;background:#f8fbff;border:1.5px solid var(--li);
+      border-radius:12px;font-size:.9rem;color:var(--dk);outline:none;transition:border-color .2s}
+    .li:focus{border-color:var(--pu)}
+    .lbtn{width:100%;padding:.88rem;background:var(--dk);color:#fff;font-family:var(--ff);
+      font-weight:700;font-size:.95rem;border:none;border-radius:14px;transition:opacity .15s}
     .lbtn:hover{opacity:.88}
 
-    /* ===== TOP NAV ===== */
-    #adminScreen{display:none}
-    .topnav{background:var(--dark);height:56px;display:flex;align-items:center;
+    /* NAV */
+    #A{display:none}
+    .nav{background:var(--dk);height:54px;display:flex;align-items:center;
       justify-content:space-between;padding:0 1.5rem;position:sticky;top:0;z-index:200;
       box-shadow:0 2px 12px rgba(0,0,0,.2)}
-    .tnl{display:flex;align-items:center;gap:.8rem}
-    .tn-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--purple),var(--purple2));
-      border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
-    .tn-name{font-family:var(--ff);font-size:.95rem;font-weight:700;color:#fff}
-    .tn-badge{background:var(--red);color:#fff;font-size:.68rem;font-weight:700;
+    .nav-l{display:flex;align-items:center;gap:.75rem}
+    .nav-ico{width:32px;height:32px;background:linear-gradient(135deg,var(--pu),var(--pu2));
+      border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+    .nav-nm{font-family:var(--ff);font-size:.93rem;font-weight:700;color:#fff}
+    .nav-bd{background:var(--re);color:#fff;font-size:.67rem;font-weight:700;
       padding:.18rem .6rem;border-radius:50px;letter-spacing:.04em;text-transform:uppercase}
-    .tnr{display:flex;align-items:center;gap:.8rem}
-    .tn-user{font-family:var(--ff);font-size:.8rem;color:rgba(255,255,255,.5)}
-    .tn-out{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);
-      font-size:.8rem;font-weight:600;padding:.3rem .8rem;border-radius:50px;cursor:pointer;transition:all .15s}
-    .tn-out:hover{border-color:rgba(255,100,100,.5);color:#ff8080}
+    .nav-r{display:flex;align-items:center;gap:.8rem}
+    .nav-u{font-family:var(--ff);font-size:.8rem;color:rgba(255,255,255,.5)}
+    .nav-out{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);
+      font-size:.8rem;font-weight:600;padding:.3rem .8rem;border-radius:50px;transition:all .15s}
+    .nav-out:hover{border-color:rgba(255,100,100,.5);color:#ff8080}
 
-    /* ===== LAYOUT ===== */
-    .layout{display:flex;min-height:calc(100vh - 56px)}
-
-    /* Sidebar */
-    .sidebar{width:220px;flex-shrink:0;background:var(--white);border-right:1px solid var(--line);
-      padding:1.2rem .8rem;display:flex;flex-direction:column;gap:.2rem;
-      position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
-    .slbl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-      color:#9ca3af;padding:.8rem .7rem .3rem}
-    .sbtn{display:flex;align-items:center;gap:.65rem;padding:.65rem .8rem;border-radius:11px;
-      border:none;background:none;font-size:.86rem;font-weight:600;color:var(--muted);
+    /* LAYOUT */
+    .lay{display:flex;min-height:calc(100vh - 54px)}
+    .sb{width:218px;flex-shrink:0;background:var(--w);border-right:1px solid var(--li);
+      padding:1.1rem .75rem;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+    .sb-lbl{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:#9ca3af;padding:.7rem .65rem .3rem}
+    .sb-btn{display:flex;align-items:center;gap:.6rem;padding:.62rem .75rem;border-radius:10px;
+      border:none;background:none;font-size:.85rem;font-weight:600;color:var(--mu);
       width:100%;text-align:left;transition:background .15s,color .15s}
-    .sbtn:hover{background:var(--bg);color:var(--dark)}
-    .sbtn.active{background:var(--plight);color:var(--purple)}
-    .sbtn svg{flex-shrink:0;opacity:.8}
-    .sbadge{margin-left:auto;background:var(--purple);color:#fff;font-size:.65rem;
-      font-weight:700;padding:.1rem .42rem;border-radius:50px}
-    .sbadge.red{background:var(--red)}
-    .sbadge.green{background:var(--green)}
+    .sb-btn:hover{background:var(--bg);color:var(--dk)}
+    .sb-btn.on{background:var(--pl);color:var(--pu)}
+    .sb-btn svg{flex-shrink:0;opacity:.8}
+    .sb-n{margin-left:auto;font-size:.65rem;font-weight:700;padding:.1rem .42rem;
+      border-radius:50px;color:#fff}
+    .sb-n.pu{background:var(--pu)}.sb-n.gr{background:var(--gr)}.sb-n.re{background:var(--re)}
 
-    /* Main */
-    .main{flex:1;padding:2rem 2.4rem;min-width:0;max-width:1100px}
-    .panel{display:none}.panel.active{display:block}
-    .page-title{font-family:var(--ff);font-size:1.25rem;font-weight:700;
-      margin-bottom:1.6rem;display:flex;align-items:center;gap:.6rem;color:var(--dark)}
+    .mn{flex:1;padding:2rem 2.2rem;min-width:0;max-width:1080px}
+    .pn{display:none}.pn.on{display:block}
+    .ptit{font-family:var(--ff);font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;
+      display:flex;align-items:center;gap:.55rem}
 
-    /* Cards estadísticas */
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
-    .stat{background:var(--white);border-radius:16px;padding:1.3rem 1.4rem;border:1px solid var(--line);
-      transition:box-shadow .2s}
-    .stat:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
-    .stat-n{font-family:var(--ff);font-size:2rem;font-weight:700;line-height:1;margin-bottom:.2rem}
-    .stat-l{font-size:.8rem;color:var(--muted)}
-    .stat.pu .stat-n{color:var(--purple)}
-    .stat.gr .stat-n{color:var(--green)}
-    .stat.re .stat-n{color:var(--red)}
-    .stat.go .stat-n{color:var(--gold)}
+    /* STATS */
+    .sts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
+    .st{background:var(--w);border-radius:15px;padding:1.25rem 1.3rem;border:1px solid var(--li)}
+    .st-n{font-family:var(--ff);font-size:1.9rem;font-weight:700;line-height:1;margin-bottom:.2rem}
+    .st-l{font-size:.79rem;color:var(--mu)}
+    .st.pu .st-n{color:var(--pu)}.st.gr .st-n{color:var(--gr)}
+    .st.re .st-n{color:var(--re)}.st.go .st-n{color:var(--go)}
 
-    /* Card contenedor */
-    .card{background:var(--white);border-radius:18px;border:1px solid var(--line);
-      overflow:hidden;margin-bottom:1.5rem}
-    .card-header{display:flex;align-items:center;justify-content:space-between;
-      padding:1.1rem 1.5rem;border-bottom:1px solid var(--line)}
-    .card-title{font-family:var(--ff);font-size:.97rem;font-weight:700;
-      display:flex;align-items:center;gap:.5rem}
-    .card-body{padding:1.5rem}
-    .card-body.np{padding:0}
+    /* CARD */
+    .cd{background:var(--w);border-radius:18px;border:1px solid var(--li);overflow:hidden;margin-bottom:1.5rem}
+    .cd-h{display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 1.4rem;border-bottom:1px solid var(--li)}
+    .cd-t{font-family:var(--ff);font-size:.96rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+    .cd-b{padding:1.4rem}
+    .cd-b.np{padding:0}
 
-    /* Tabla */
-    .tbl{width:100%;border-collapse:collapse}
-    .tbl th{font-size:.71rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-      color:var(--muted);padding:.75rem 1.4rem;text-align:left;border-bottom:1px solid var(--line);background:#fafbff}
-    .tbl td{padding:.82rem 1.4rem;font-size:.87rem;border-bottom:1px solid var(--line)}
-    .tbl tr:last-child td{border-bottom:none}
-    .tbl tbody tr:hover td{background:#fafbff}
-    .mn{font-weight:700}.me{font-size:.78rem;color:var(--muted)}
-    .schip{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;font-weight:700;
-      padding:.2rem .65rem;border-radius:50px}
-    .sc-a{background:rgba(30,138,80,.1);color:var(--green)}
+    /* TABLE */
+    .tb{width:100%;border-collapse:collapse}
+    .tb th{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--mu);padding:.7rem 1.3rem;text-align:left;border-bottom:1px solid var(--li);background:#fafbff}
+    .tb td{padding:.8rem 1.3rem;font-size:.86rem;border-bottom:1px solid var(--li)}
+    .tb tr:last-child td{border-bottom:none}
+    .tb tbody tr:hover td{background:#fafbff}
+    .mn-n{font-weight:700}.mn-e{font-size:.77rem;color:var(--mu)}
+    .sc{display:inline-flex;align-items:center;gap:.3rem;font-size:.71rem;font-weight:700;
+      padding:.2rem .6rem;border-radius:50px}
+    .sc-a{background:rgba(30,138,80,.1);color:var(--gr)}
     .sc-p{background:rgba(232,160,32,.12);color:#7a4800}
-    .sc-i{background:#f3f4f6;color:#9ca3af}
-    .pchip{font-size:.75rem;font-weight:700;padding:.18rem .55rem;border-radius:50px;
-      background:var(--plight);color:var(--purple)}
-    .search-inp{padding:.45rem .9rem;border:1.5px solid var(--line);border-radius:10px;
-      font-size:.84rem;outline:none;width:240px;transition:border-color .2s}
-    .search-inp:focus{border-color:var(--purple)}
+    .pch{font-size:.74rem;font-weight:700;padding:.18rem .5rem;border-radius:50px;
+      background:var(--pl);color:var(--pu)}
+    .srch{padding:.44rem .88rem;border:1.5px solid var(--li);border-radius:10px;
+      font-size:.83rem;outline:none;width:230px;transition:border-color .2s}
+    .srch:focus{border-color:var(--pu)}
 
-    /* Botones acción */
-    .abtn{padding:.32rem .75rem;border-radius:8px;font-size:.75rem;font-weight:700;
-      border:none;cursor:pointer;transition:opacity .15s;margin-right:.3rem}
-    .abtn:hover{opacity:.78}
-    .abtn-on {background:rgba(30,138,80,.1);color:var(--green)}
-    .abtn-off{background:rgba(217,64,64,.1);color:var(--red)}
-    .abtn-del{background:rgba(217,64,64,.08);color:var(--red)}
-    .abtn-edit{background:var(--plight);color:var(--purple)}
+    /* ACTIONS */
+    .ab{padding:.3rem .72rem;border-radius:8px;font-size:.74rem;font-weight:700;
+      border:none;transition:opacity .15s;margin-right:.3rem}
+    .ab:hover{opacity:.78}
+    .ab-on{background:rgba(30,138,80,.1);color:var(--gr)}
+    .ab-off{background:rgba(217,64,64,.1);color:var(--re)}
+    .ab-del{background:rgba(217,64,64,.08);color:var(--re)}
 
-    /* Formularios */
-    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.1rem}
+    /* FORM */
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
     .fg3{grid-template-columns:1fr 1fr 1fr}
-    .fg1{grid-template-columns:1fr}
-    .fspan{grid-column:1/-1}
-    .flbl{font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-      color:var(--muted);display:block;margin-bottom:.35rem}
-    .finp{width:100%;padding:.65rem .9rem;background:#f8fbff;border:1.5px solid var(--line);
-      border-radius:10px;font-size:.88rem;color:var(--dark);outline:none;transition:border-color .2s}
-    .finp:focus{border-color:var(--purple);background:#fff}
-    .fsel{width:100%;padding:.65rem .9rem;border:1.5px solid var(--line);border-radius:10px;
-      font-size:.88rem;color:var(--dark);background:#f8fbff;outline:none;cursor:pointer;
-      appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right .8rem center;padding-right:2rem}
-    .fsel:focus{border-color:var(--purple)}
-    .ftxt{width:100%;padding:.65rem .9rem;background:#f8fbff;border:1.5px solid var(--line);
-      border-radius:10px;font-size:.88rem;color:var(--dark);outline:none;resize:vertical;min-height:80px}
-    .ftxt:focus{border-color:var(--purple);background:#fff}
+    .fsp{grid-column:1/-1}
+    .fl{font-size:.69rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--mu);display:block;margin-bottom:.32rem}
+    .fi{width:100%;padding:.64rem .88rem;background:#f8fbff;border:1.5px solid var(--li);
+      border-radius:10px;font-size:.87rem;color:var(--dk);outline:none;transition:border-color .2s}
+    .fi:focus{border-color:var(--pu);background:#fff}
+    .fs{width:100%;padding:.64rem .88rem;border:1.5px solid var(--li);border-radius:10px;
+      font-size:.87rem;color:var(--dk);background:#f8fbff;outline:none;
+      appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
+    .fs:focus{border-color:var(--pu)}
 
-    /* Botón principal */
-    .btn-main{display:inline-flex;align-items:center;gap:.5rem;background:var(--purple);
-      color:#fff;border:none;border-radius:12px;padding:.75rem 1.6rem;
-      font-family:var(--ff);font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .15s}
-    .btn-main:hover{opacity:.88}
-    .btn-main.green{background:var(--green)}
-    .btn-main.red{background:var(--red)}
-    .btn-sec{display:inline-flex;align-items:center;gap:.5rem;background:transparent;
-      color:var(--dark);border:1.5px solid var(--line);border-radius:12px;padding:.72rem 1.4rem;
-      font-family:var(--ff);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s}
-    .btn-sec:hover{border-color:var(--purple);color:var(--purple)}
+    /* BUTTONS */
+    .bm{display:inline-flex;align-items:center;gap:.5rem;background:var(--pu);color:#fff;
+      border:none;border-radius:12px;padding:.72rem 1.5rem;font-family:var(--ff);
+      font-size:.87rem;font-weight:700;transition:opacity .15s}
+    .bm:hover{opacity:.88}
+    .bm.gr{background:var(--gr)}.bm.re{background:var(--re)}
+    .bs{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--dk);
+      border:1.5px solid var(--li);border-radius:12px;padding:.7rem 1.3rem;
+      font-family:var(--ff);font-size:.87rem;font-weight:700;transition:all .15s}
+    .bs:hover{border-color:var(--pu);color:var(--pu)}
 
-    /* Video rows */
-    .vrow{display:flex;align-items:center;gap:1rem;padding:.9rem 1.5rem;
-      border-bottom:1px solid var(--line)}
-    .vrow:last-child{border-bottom:none}
-    .vthumb{width:52px;height:40px;border-radius:9px;overflow:hidden;flex-shrink:0}
-    .vthumb img{width:100%;height:100%;object-fit:cover}
-    .vthumb-def{width:52px;height:40px;border-radius:9px;background:linear-gradient(135deg,#12103a,#4f35b3);
+    /* VIDEO ROWS */
+    .vr{display:flex;align-items:center;gap:1rem;padding:.88rem 1.4rem;border-bottom:1px solid var(--li)}
+    .vr:last-child{border-bottom:none}
+    .vt{width:54px;height:40px;border-radius:9px;overflow:hidden;flex-shrink:0}
+    .vt img{width:100%;height:100%;object-fit:cover}
+    .vt-d{width:54px;height:40px;border-radius:9px;background:linear-gradient(135deg,#12103a,#4f35b3);
       display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-    .vinfo{flex:1;min-width:0}
-    .vtitle{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .vmeta{font-size:.75rem;color:var(--muted)}
-    .vcat{font-size:.71rem;font-weight:700;padding:.15rem .5rem;border-radius:50px;
-      background:var(--plight);color:var(--purple);white-space:nowrap;flex-shrink:0}
+    .vi{flex:1;min-width:0}
+    .vtit{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .vme{font-size:.74rem;color:var(--mu)}
+    .vc{font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px;
+      background:var(--pl);color:var(--pu);white-space:nowrap;flex-shrink:0}
 
-    /* Feed rows */
-    .feed-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;
-      border-bottom:1px solid var(--line)}
-    .feed-item:last-child{border-bottom:none}
-    .feed-day-badge{font-size:.72rem;font-weight:700;text-transform:uppercase;
-      letter-spacing:.05em;padding:.22rem .65rem;border-radius:50px;
-      background:var(--plight);color:var(--purple);white-space:nowrap;flex-shrink:0;width:90px;text-align:center}
-    .feed-content{flex:1;min-width:0}
-    .feed-title-txt{font-size:.9rem;font-weight:700}
-    .feed-meta-txt{font-size:.75rem;color:var(--muted)}
-    .tag-v{background:rgba(217,64,64,.1);color:var(--red);font-size:.7rem;font-weight:700;
-      padding:.15rem .5rem;border-radius:50px}
-    .tag-p{background:rgba(79,53,179,.1);color:var(--purple);font-size:.7rem;font-weight:700;
-      padding:.15rem .5rem;border-radius:50px}
-    .tag-l{background:rgba(232,160,32,.15);color:#7a4800;font-size:.7rem;font-weight:700;
-      padding:.15rem .5rem;border-radius:50px}
-    .tag-n{background:var(--dark);color:#fff;font-size:.7rem;font-weight:700;
-      padding:.15rem .5rem;border-radius:50px}
+    /* FEED ROWS */
+    .fr{display:flex;align-items:center;gap:1rem;padding:.95rem 1.4rem;border-bottom:1px solid var(--li)}
+    .fr:last-child{border-bottom:none}
+    .fd{font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+      padding:.2rem .65rem;border-radius:50px;background:var(--pl);color:var(--pu);
+      white-space:nowrap;flex-shrink:0;min-width:90px;text-align:center}
+    .fc{flex:1;min-width:0}
+    .ft{font-size:.9rem;font-weight:700}
+    .fm{font-size:.74rem;color:var(--mu)}
+    .tv{background:rgba(217,64,64,.1);color:var(--re);font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px}
+    .tp{background:rgba(79,53,179,.1);color:var(--pu);font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px}
+    .tl{background:rgba(232,160,32,.15);color:#7a4800;font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px}
+    .tn{background:var(--dk);color:#fff;font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px}
 
-    /* Sesion live card */
-    .live-card{background:linear-gradient(135deg,#1a1060,#4f35b3);border-radius:16px;
-      padding:1.5rem;margin-bottom:1rem;color:#fff}
-    .live-card-title{font-family:var(--ff);font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
-    .live-card-meta{font-size:.83rem;color:rgba(255,255,255,.6);margin-bottom:1rem}
-    .live-card-btns{display:flex;gap:.6rem;flex-wrap:wrap}
+    /* LIVE CARD */
+    .lvc{background:linear-gradient(135deg,#1a1060,#4f35b3);border-radius:16px;
+      padding:1.5rem;color:#fff;margin-bottom:1rem}
+    .lvc-t{font-family:var(--ff);font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+    .lvc-m{font-size:.83rem;color:rgba(255,255,255,.6)}
 
-    /* Toast */
-    .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
-      background:var(--dark);color:#fff;font-family:var(--ff);font-size:.88rem;font-weight:600;
-      padding:.75rem 1.4rem;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:500;
+    /* TOAST */
+    .tst{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
+      background:var(--dk);color:#fff;font-family:var(--ff);font-size:.87rem;font-weight:600;
+      padding:.72rem 1.4rem;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:500;
       opacity:0;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;white-space:nowrap}
-    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-    .toast.green{background:var(--teal)}
-    .toast.red{background:var(--red)}
+    .tst.show{transform:translateX(-50%) translateY(0);opacity:1}
+    .tst.gr{background:var(--te)}
 
-    /* Modal */
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,16,58,.45);
+    /* MODAL */
+    .mo{display:none;position:fixed;inset:0;background:rgba(18,16,58,.45);
       backdrop-filter:blur(4px);z-index:300;align-items:center;justify-content:center;padding:1rem}
-    .modal-overlay.show{display:flex}
-    .modal{background:#fff;border-radius:22px;width:100%;max-width:520px;
+    .mo.show{display:flex}
+    .mb{background:#fff;border-radius:22px;width:100%;max-width:500px;
       box-shadow:0 24px 60px rgba(18,16,58,.2);overflow:hidden}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;
-      padding:1.2rem 1.5rem;border-bottom:1px solid var(--line)}
-    .modal-title{font-family:var(--ff);font-size:1rem;font-weight:700}
-    .modal-close{background:rgba(0,0,0,.06);border:none;width:30px;height:30px;
-      border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
-    .modal-body{padding:1.4rem 1.5rem}
-    .modal-foot{padding:.9rem 1.5rem;border-top:1px solid var(--line);
-      display:flex;gap:.6rem;justify-content:flex-end}
+    .mb-h{display:flex;align-items:center;justify-content:space-between;
+      padding:1.1rem 1.4rem;border-bottom:1px solid var(--li)}
+    .mb-t{font-family:var(--ff);font-size:1rem;font-weight:700}
+    .mb-x{background:rgba(0,0,0,.06);border:none;width:30px;height:30px;border-radius:50%;
+      font-size:1rem;display:flex;align-items:center;justify-content:center}
+    .mb-b{padding:1.3rem 1.4rem}
+    .mb-f{padding:.85rem 1.4rem;border-top:1px solid var(--li);display:flex;gap:.6rem;justify-content:flex-end}
 
-    @media(max-width:900px){
-      .stats{grid-template-columns:1fr 1fr}
-      .sidebar{display:none}
-      .main{padding:1.2rem}
-    }
+    @media(max-width:900px){.sts{grid-template-columns:1fr 1fr}.sb{display:none}.mn{padding:1.2rem}}
   </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="loginScreen">
-  <div class="lcard">
-    <div class="lbrand">
-      <div class="lbrand-icon">🐾</div>
-      <div class="lbrand-name"><strong>GlobalVet</strong> Admin</div>
-    </div>
-    <h1 class="ltitle">Panel Administrativo</h1>
-    <p class="lsub">Acceso exclusivo para administradores del Club</p>
-    <div class="lerr" id="lerr">Correo o contraseña incorrectos.</div>
-    <div class="lfield">
-      <label class="llbl" for="lemail">Correo</label>
-      <input class="linput" type="email" id="lemail" placeholder="admin@globalvet.com" autocomplete="email">
-    </div>
-    <div class="lfield">
-      <label class="llbl" for="lpass">Contraseña</label>
-      <input class="linput" type="password" id="lpass" placeholder="Tu contraseña" autocomplete="current-password">
-    </div>
+<div id="L">
+  <div class="lc">
+    <div class="lb"><div class="lb-ico">🐾</div><div class="lb-nm"><strong>GlobalVet</strong> Admin</div></div>
+    <h1 class="lt">Panel Administrativo</h1>
+    <p class="ls">Solo para administradores del Club</p>
+    <div class="le" id="le">Correo o contraseña incorrectos.</div>
+    <div class="lf"><label class="ll">Correo</label><input class="li" type="email" id="lem" placeholder="admin@globalvet.com"></div>
+    <div class="lf"><label class="ll">Contraseña</label><input class="li" type="password" id="lps" placeholder="Tu contraseña"></div>
     <button class="lbtn" id="lbtn" onclick="doLogin()">Iniciar sesión</button>
   </div>
 </div>
 
 <!-- ADMIN -->
-<div id="adminScreen">
-  <nav class="topnav">
-    <div class="tnl">
-      <div class="tn-icon">🐾</div>
-      <span class="tn-name">GlobalVet Admin</span>
-      <span class="tn-badge">Admin</span>
+<div id="A">
+  <nav class="nav">
+    <div class="nav-l">
+      <div class="nav-ico">🐾</div>
+      <span class="nav-nm">GlobalVet Admin</span>
+      <span class="nav-bd">Admin</span>
     </div>
-    <div class="tnr">
-      <span class="tn-user" id="tnUser"></span>
-      <button class="tn-out" onclick="doLogout()">Salir</button>
+    <div class="nav-r">
+      <span class="nav-u" id="nu"></span>
+      <button class="nav-out" onclick="doLogout()">Salir</button>
     </div>
   </nav>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="slbl">Principal</div>
-      <button class="sbtn active" onclick="sp('resumen',this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  <div class="lay">
+    <aside class="sb">
+      <div class="sb-lbl">Principal</div>
+      <button class="sb-btn on" onclick="sp('r',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Resumen
       </button>
-      <div class="slbl">Miembros</div>
-      <button class="sbtn" onclick="sp('miembros',this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div class="sb-lbl">Miembros</div>
+      <button class="sb-btn" onclick="sp('m',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Todos los miembros
-        <span class="sbadge" id="sbTotal">0</span>
+        <span class="sb-n pu" id="sbt">0</span>
       </button>
-      <div class="slbl">Contenido del Club</div>
-      <button class="sbtn" onclick="sp('videos',this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      <div class="sb-lbl">Contenido Club</div>
+      <button class="sb-btn" onclick="sp('v',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         Videos
-        <span class="sbadge green" id="sbVideos">0</span>
+        <span class="sb-n gr" id="sbv">0</span>
       </button>
-      <button class="sbtn" onclick="sp('feed',this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <button class="sb-btn" onclick="sp('f',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         Feed semanal
       </button>
-      <button class="sbtn" onclick="sp('sesion',this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <button class="sb-btn" onclick="sp('s',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Próxima sesión
       </button>
     </aside>
 
-    <main class="main">
+    <main class="mn">
 
-      <!-- ===== RESUMEN ===== -->
-      <div class="panel active" id="panel-resumen">
-        <div class="page-title">📊 Resumen del Club</div>
-        <div class="stats">
-          <div class="stat pu"><div class="stat-n" id="stTotal">—</div><div class="stat-l">Miembros totales</div></div>
-          <div class="stat gr"><div class="stat-n" id="stActivos">—</div><div class="stat-l">Activos</div></div>
-          <div class="stat re"><div class="stat-n" id="stPend">—</div><div class="stat-l">Pendientes</div></div>
-          <div class="stat go"><div class="stat-n" id="stVideos">—</div><div class="stat-l">Videos en biblioteca</div></div>
+      <!-- RESUMEN -->
+      <div class="pn on" id="p-r">
+        <div class="ptit">📊 Resumen del Club</div>
+        <div class="sts">
+          <div class="st pu"><div class="st-n" id="stt">—</div><div class="st-l">Miembros totales</div></div>
+          <div class="st gr"><div class="st-n" id="sta">—</div><div class="st-l">Activos</div></div>
+          <div class="st re"><div class="st-n" id="stp">—</div><div class="st-l">Pendientes</div></div>
+          <div class="st go"><div class="st-n" id="stv">—</div><div class="st-l">Videos en biblioteca</div></div>
         </div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">👥 Últimos registros</div></div>
-          <div class="card-body np">
-            <table class="tbl"><thead><tr><th>Miembro</th><th>Plan</th><th>Estado</th><th>Fecha</th></tr></thead>
-            <tbody id="recentTbl"><tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted)">Cargando…</td></tr></tbody></table>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">👥 Últimos registros</div></div>
+          <div class="cd-b np">
+            <table class="tb"><thead><tr><th>Miembro</th><th>Plan</th><th>Estado</th><th>Fecha</th></tr></thead>
+            <tbody id="rtb"><tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</td></tr></tbody></table>
           </div>
         </div>
       </div>
 
-      <!-- ===== MIEMBROS ===== -->
-      <div class="panel" id="panel-miembros">
-        <div class="page-title">👥 Miembros del Club</div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Todos los miembros</div>
-            <input class="search-inp" type="text" placeholder="Buscar nombre o email…" oninput="filterM(this.value)">
+      <!-- MIEMBROS -->
+      <div class="pn" id="p-m">
+        <div class="ptit">👥 Miembros del Club</div>
+        <div class="cd">
+          <div class="cd-h">
+            <div class="cd-t">Todos los miembros</div>
+            <input class="srch" type="text" placeholder="Buscar nombre o email…" oninput="fM(this.value)">
           </div>
-          <div class="card-body np">
-            <table class="tbl">
-              <thead><tr><th>Nombre</th><th>Email</th><th>Plan</th><th>Estado</th><th>Registro</th><th>Acciones</th></tr></thead>
-              <tbody id="membersTbl"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">Cargando…</td></tr></tbody>
+          <div class="cd-b np">
+            <table class="tb">
+              <thead><tr><th>Nombre</th><th>Email</th><th>Plan</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr></thead>
+              <tbody id="mtb"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- ===== VIDEOS ===== -->
-      <div class="panel" id="panel-videos">
-        <div class="page-title">🎬 Videos del Club</div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">➕ Agregar video</div>
-          </div>
-          <div class="card-body">
-            <div class="fgrid">
-              <div>
-                <label class="flbl">Título</label>
-                <input class="finp" type="text" id="vTitulo" placeholder="Ej: Cirugía de tejidos blandos">
-              </div>
-              <div>
-                <label class="flbl">Categoría / Curso</label>
-                <select class="fsel" id="vCat">
+      <!-- VIDEOS -->
+      <div class="pn" id="p-v">
+        <div class="ptit">🎬 Videos del Club</div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">➕ Agregar nuevo video</div></div>
+          <div class="cd-b">
+            <div class="fg">
+              <div><label class="fl">Título del video</label><input class="fi" type="text" id="vt" placeholder="Ej: Diagnóstico diferencial canino"></div>
+              <div><label class="fl">Categoría</label>
+                <select class="fs" id="vc">
                   <option value="endo">Endocrinología canina básica</option>
                   <option value="onco">Bases de oncología veterinaria</option>
-                  <option value="hema">Hematología clínica en pequeñas especies</option>
+                  <option value="hema">Hematología clínica</option>
                   <option value="otro">Otro / Nuevo curso</option>
                 </select>
               </div>
-              <div>
-                <label class="flbl">URL de YouTube</label>
-                <input class="finp" type="url" id="vUrl" placeholder="https://youtu.be/XXXXXXX">
-              </div>
-              <div>
-                <label class="flbl">Instructor</label>
-                <input class="finp" type="text" id="vInst" placeholder="Ej: MVZ. Juan Pérez">
-              </div>
-              <div>
-                <label class="flbl">Duración (opcional)</label>
-                <input class="finp" type="text" id="vDur" placeholder="Ej: 45 min">
-              </div>
-              <div>
-                <label class="flbl">Etiqueta</label>
-                <select class="fsel" id="vTag">
+              <div><label class="fl">URL de YouTube</label><input class="fi" type="url" id="vu" placeholder="https://youtu.be/XXXXXXX"></div>
+              <div><label class="fl">Instructor</label><input class="fi" type="text" id="vi" placeholder="MVZ. Juan Pérez"></div>
+              <div><label class="fl">Duración</label><input class="fi" type="text" id="vd" placeholder="42 min"></div>
+              <div><label class="fl">Etiqueta</label>
+                <select class="fs" id="vtg">
                   <option value="nuevo">🆕 Nuevo</option>
                   <option value="">Sin etiqueta</option>
                   <option value="visto">Visto</option>
                 </select>
               </div>
             </div>
-            <button class="btn-main" onclick="addVideo()">
+            <button class="bm" onclick="addV()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Agregar video
+              Agregar video al Club
             </button>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">📚 Biblioteca actual</div></div>
-          <div class="card-body np" id="videosList">
-            <div style="text-align:center;padding:2rem;color:var(--muted)">Cargando videos…</div>
-          </div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">📚 Biblioteca actual</div></div>
+          <div class="cd-b np" id="vlist"><div style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</div></div>
         </div>
       </div>
 
-      <!-- ===== FEED SEMANAL ===== -->
-      <div class="panel" id="panel-feed">
-        <div class="page-title">📅 Feed semanal del Club</div>
-        <div class="card" style="margin-bottom:1.5rem">
-          <div class="card-header"><div class="card-title">✏️ Agregar / editar contenido de la semana</div></div>
-          <div class="card-body">
-            <div class="fgrid fg3">
-              <div>
-                <label class="flbl">Día</label>
-                <select class="fsel" id="fDia">
-                  <option value="Lunes">Lunes</option>
-                  <option value="Martes">Martes</option>
-                  <option value="Miércoles">Miércoles</option>
-                  <option value="Jueves">Jueves</option>
-                  <option value="Viernes">Viernes</option>
-                  <option value="Nuevo hoy">Nuevo hoy</option>
+      <!-- FEED -->
+      <div class="pn" id="p-f">
+        <div class="ptit">📅 Feed semanal</div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">✏️ Agregar contenido a la semana</div></div>
+          <div class="cd-b">
+            <div class="fg fg3">
+              <div><label class="fl">Día</label>
+                <select class="fs" id="fd">
+                  <option>Lunes</option><option>Martes</option><option>Miércoles</option>
+                  <option>Jueves</option><option>Viernes</option><option>Nuevo hoy</option>
                 </select>
               </div>
-              <div>
-                <label class="flbl">Tipo</label>
-                <select class="fsel" id="fTipo">
+              <div><label class="fl">Tipo</label>
+                <select class="fs" id="ftp">
                   <option value="video">🎥 Video</option>
                   <option value="pdf">📄 PDF</option>
                   <option value="live">🔴 En vivo</option>
                   <option value="nuevo">✨ Nuevo</option>
                 </select>
               </div>
-              <div>
-                <label class="flbl">Meta (instructor, duración…)</label>
-                <input class="finp" type="text" id="fMeta" placeholder="Dr. Morales · 12 min">
-              </div>
-              <div class="fspan">
-                <label class="flbl">Título del contenido</label>
-                <input class="finp" type="text" id="fTitulo" placeholder="Ej: Diagnóstico diferencial: vómito crónico en felinos">
-              </div>
+              <div><label class="fl">Meta (instructor, duración…)</label><input class="fi" type="text" id="fm" placeholder="Dr. Morales · 12 min"></div>
+              <div class="fsp"><label class="fl">Título del contenido</label><input class="fi" type="text" id="ftt" placeholder="Diagnóstico diferencial: vómito crónico en felinos"></div>
             </div>
-            <button class="btn-main" onclick="addFeedItem()">
+            <button class="bm" onclick="addF()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               Agregar al feed
             </button>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">📋 Contenido de esta semana</div>
-            <button class="btn-sec" onclick="clearFeed()" style="font-size:.8rem;padding:.4rem .9rem;">
-              🗑️ Limpiar semana
-            </button>
+        <div class="cd">
+          <div class="cd-h">
+            <div class="cd-t">📋 Contenido de esta semana</div>
+            <button class="bs" onclick="clrF()" style="font-size:.8rem;padding:.38rem .85rem">🗑️ Limpiar semana</button>
           </div>
-          <div class="card-body np" id="feedList">
-            <div style="text-align:center;padding:2rem;color:var(--muted)">Cargando feed…</div>
-          </div>
+          <div class="cd-b np" id="flist"><div style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</div></div>
         </div>
       </div>
 
-      <!-- ===== PRÓXIMA SESIÓN ===== -->
-      <div class="panel" id="panel-sesion">
-        <div class="page-title">📡 Próxima sesión en vivo</div>
-        <div class="card" style="margin-bottom:1.5rem">
-          <div class="card-header"><div class="card-title">✏️ Editar sesión</div></div>
-          <div class="card-body">
-            <div class="fgrid">
-              <div>
-                <label class="flbl">Título de la sesión</label>
-                <input class="finp" type="text" id="sTitle" placeholder="Ej: Q&A Endocrinología">
-              </div>
-              <div>
-                <label class="flbl">Instructor</label>
-                <input class="finp" type="text" id="sInst" placeholder="Ej: Dr. Juárez">
-              </div>
-              <div>
-                <label class="flbl">Fecha (DD de Mes)</label>
-                <input class="finp" type="text" id="sFecha" placeholder="Ej: 30 de abril">
-              </div>
-              <div>
-                <label class="flbl">Hora</label>
-                <input class="finp" type="text" id="sHora" placeholder="Ej: 8:00 PM">
-              </div>
-              <div class="fspan">
-                <label class="flbl">Fecha/hora exacta para cronómetro</label>
-                <input class="finp" type="datetime-local" id="sFechaExacta">
-              </div>
+      <!-- SESION -->
+      <div class="pn" id="p-s">
+        <div class="ptit">📡 Próxima sesión en vivo</div>
+        <div class="cd" style="margin-bottom:1.5rem">
+          <div class="cd-h"><div class="cd-t">✏️ Configurar sesión</div></div>
+          <div class="cd-b">
+            <div class="fg">
+              <div><label class="fl">Título</label><input class="fi" type="text" id="st" placeholder="Q&A Endocrinología"></div>
+              <div><label class="fl">Instructor</label><input class="fi" type="text" id="si" placeholder="Dr. Juárez"></div>
+              <div><label class="fl">Fecha (texto)</label><input class="fi" type="text" id="sf" placeholder="23 de abril"></div>
+              <div><label class="fl">Hora</label><input class="fi" type="text" id="sh" placeholder="8:00 PM"></div>
+              <div class="fsp"><label class="fl">Fecha/hora exacta para cronómetro</label><input class="fi" type="datetime-local" id="se"></div>
             </div>
-            <button class="btn-main green" onclick="saveSesion()">
+            <button class="bm gr" onclick="saveS()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Guardar sesión
+              Guardar sesión — se actualiza en tiempo real
             </button>
           </div>
         </div>
-        <div class="live-card" id="livePreview">
-          <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.6rem">Vista previa en el dashboard</div>
-          <div class="live-card-title" id="lpTitle">Q&A Endocrinología</div>
-          <div class="live-card-meta" id="lpMeta">Dr. Juárez · 23 de abril · 8:00 PM</div>
-          <div style="font-size:.8rem;color:rgba(255,255,255,.5)">El cronómetro se calculará automáticamente desde la fecha exacta ingresada.</div>
+        <div class="lvc">
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem">Vista previa en el dashboard</div>
+          <div class="lvc-t" id="lpt">Q&A Endocrinología</div>
+          <div class="lvc-m" id="lpm">Dr. Juárez · 23 de abril · 8:00 PM</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.5rem">El cronómetro se calcula automáticamente desde la fecha exacta.</div>
         </div>
       </div>
 
@@ -502,335 +407,237 @@
   </div>
 </div>
 
-<!-- MODAL confirmar eliminar -->
-<div class="modal-overlay" id="confirmModal">
-  <div class="modal">
-    <div class="modal-head">
-      <div class="modal-title">⚠️ Confirmar eliminación</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <p style="font-size:.92rem;color:var(--muted);" id="confirmMsg">¿Estás seguro de que quieres eliminar este elemento?</p>
-    </div>
-    <div class="modal-foot">
-      <button class="btn-sec" onclick="closeModal()">Cancelar</button>
-      <button class="btn-main red" id="confirmBtn">Eliminar</button>
-    </div>
+<!-- MODAL -->
+<div class="mo" id="mo">
+  <div class="mb">
+    <div class="mb-h"><div class="mb-t">⚠️ Confirmar</div><button class="mb-x" onclick="cmo()">✕</button></div>
+    <div class="mb-b"><p style="font-size:.92rem;color:var(--mu)" id="moMsg"></p></div>
+    <div class="mb-f"><button class="bs" onclick="cmo()">Cancelar</button><button class="bm re" id="moBtn">Eliminar</button></div>
   </div>
 </div>
 
-<div class="toast" id="toastEl"></div>
+<div class="tst" id="tst"></div>
 
-<!-- ===== FIREBASE ===== -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, addDoc, deleteDoc, serverTimestamp, query, orderBy }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, addDoc, deleteDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  const cfg={apiKey:"AIzaSyDw-1mNG-xj55Yb_TyHw6LFWwpptqJZJ3M",authDomain:"club-global-vet.firebaseapp.com",projectId:"club-global-vet",storageBucket:"club-global-vet.firebasestorage.app",messagingSenderId:"448888067634",appId:"1:448888067634:web:96adc6b03ba3248f4f0e2b"};
-  const app=initializeApp(cfg), auth=getAuth(app), db=getFirestore(app);
+const cfg={apiKey:"AIzaSyDw-1mNG-xj55Yb_TyHw6LFWwpptqJZJ3M",authDomain:"club-global-vet.firebaseapp.com",
+  projectId:"club-global-vet",storageBucket:"club-global-vet.firebasestorage.app",
+  messagingSenderId:"448888067634",appId:"1:448888067634:web:96adc6b03ba3248f4f0e2b"};
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+const ADMINS=['globalvetmexico1@gmail.com','teccapitalweb@gmail.com'];
+let AM=[],AV=[];
 
-  const ADMINS=['globalvetmexico1@gmail.com','teccapitalweb@gmail.com'];
-  let allMembers=[], allVideos=[], allFeed=[];
+// AUTH
+onAuthStateChanged(auth,u=>{
+  if(u&&ADMINS.includes(u.email)){
+    document.getElementById('L').style.display='none';
+    document.getElementById('A').style.display='block';
+    document.getElementById('nu').textContent=u.email;
+    loadAll();
+  }else if(u){signOut(auth);err('Sin permisos de administrador.');}
+  else{document.getElementById('L').style.display='flex';document.getElementById('A').style.display='none';}
+});
 
-  // ── AUTH ──────────────────────────────────────────────
-  onAuthStateChanged(auth, user=>{
-    if(user && ADMINS.includes(user.email)){
-      document.getElementById('loginScreen').style.display='none';
-      document.getElementById('adminScreen').style.display='block';
-      document.getElementById('tnUser').textContent=user.email;
-      loadAll();
-    } else if(user){
-      signOut(auth);
-      showErr('Esta cuenta no tiene permisos de administrador.');
-    } else {
-      document.getElementById('loginScreen').style.display='flex';
-      document.getElementById('adminScreen').style.display='none';
-    }
-  });
+window.doLogin=async()=>{
+  const e=document.getElementById('lem').value.trim(),p=document.getElementById('lps').value;
+  if(!e||!p)return;
+  const b=document.getElementById('lbtn');b.textContent='Verificando…';b.disabled=true;
+  try{await signInWithEmailAndPassword(auth,e,p);}
+  catch{err('Correo o contraseña incorrectos.');b.textContent='Iniciar sesión';b.disabled=false;}
+};
+window.doLogout=async()=>{await signOut(auth);};
+function err(m){const el=document.getElementById('le');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),4000);}
 
-  window.doLogin=async()=>{
-    const e=document.getElementById('lemail').value.trim();
-    const p=document.getElementById('lpass').value;
-    if(!e||!p)return;
-    const btn=document.getElementById('lbtn');
-    btn.textContent='Verificando…';btn.disabled=true;
-    try{ await signInWithEmailAndPassword(auth,e,p); }
-    catch(err){ showErr('Correo o contraseña incorrectos.'); btn.textContent='Iniciar sesión';btn.disabled=false; }
-  };
+async function loadAll(){await Promise.all([loadM(),loadV(),loadF(),loadS()]);}
 
-  window.doLogout=async()=>{ await signOut(auth); };
+// MIEMBROS
+async function loadM(){
+  try{
+    const s=await getDocs(collection(db,'usuarios'));
+    AM=s.docs.map(d=>({id:d.id,...d.data()}));
+    const t=AM.length,a=AM.filter(m=>m.membresiaActiva||m.estado==='activo').length;
+    document.getElementById('stt').textContent=t;
+    document.getElementById('sta').textContent=a;
+    document.getElementById('stp').textContent=t-a;
+    document.getElementById('sbt').textContent=t;
+    rM(AM);rR(AM.slice(0,6));
+  }catch{toast('❌ Error cargando miembros');}
+}
+function rM(list){
+  const tb=document.getElementById('mtb');
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--mu)">Sin miembros</td></tr>';return;}
+  tb.innerHTML=list.map(m=>{
+    const ok=m.membresiaActiva||m.estado==='activo';
+    const f=m.fechaRegistro?.toDate?m.fechaRegistro.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'—';
+    return`<tr>
+      <td><div class="mn-n">${m.nombre||'—'}</div></td>
+      <td><div class="mn-e">${m.email||'—'}</div></td>
+      <td><span class="pch">${m.planLabel||'Plan Mensual'}</span></td>
+      <td><span class="sc ${ok?'sc-a':'sc-p'}">${ok?'✓ Activo':'⏳ Pendiente'}</span></td>
+      <td style="font-size:.79rem;color:var(--mu)">${f}</td>
+      <td>${ok?`<button class="ab ab-off" onclick="tgM('${m.id}',false)">Desactivar</button>`
+               :`<button class="ab ab-on"  onclick="tgM('${m.id}',true)">Activar</button>`}</td>
+    </tr>`;
+  }).join('');
+}
+function rR(list){
+  const tb=document.getElementById('rtb');
+  if(!list.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--mu)">Sin registros</td></tr>';return;}
+  tb.innerHTML=list.map(m=>{
+    const ok=m.membresiaActiva||m.estado==='activo';
+    const f=m.fechaRegistro?.toDate?m.fechaRegistro.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'—';
+    return`<tr>
+      <td><div class="mn-n">${m.nombre||'—'}</div><div class="mn-e">${m.email||'—'}</div></td>
+      <td><span class="pch">${m.planLabel||'Plan Mensual'}</span></td>
+      <td><span class="sc ${ok?'sc-a':'sc-p'}">${ok?'✓ Activo':'⏳ Pendiente'}</span></td>
+      <td style="font-size:.79rem;color:var(--mu)">${f}</td>
+    </tr>`;
+  }).join('');
+}
+window.fM=q=>{const f=AM.filter(m=>(m.nombre||'').toLowerCase().includes(q.toLowerCase())||(m.email||'').toLowerCase().includes(q.toLowerCase()));rM(f);};
+window.tgM=async(uid,on)=>{
+  try{await updateDoc(doc(db,'usuarios',uid),{membresiaActiva:on,estado:on?'activo':'inactivo'});
+    toast(on?'✅ Membresía activada':'⚠️ Membresía desactivada',on);loadM();}
+  catch{toast('❌ Error al actualizar');}
+};
 
-  function showErr(m){const el=document.getElementById('lerr');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),4000);}
+// VIDEOS
+const CN={endo:'Endocrinología',onco:'Oncología',hema:'Hematología',otro:'Otro'};
+const CI={endo:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/endocrinologia.png',
+         onco:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/oncologia.png',
+         hema:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/hematologia.png'};
+async function loadV(){
+  try{const s=await getDocs(collection(db,'videos_club'));
+    AV=s.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('stv').textContent=AV.length;
+    document.getElementById('sbv').textContent=AV.length;
+    rV(AV);}catch{rV([]);}
+}
+function rV(list){
+  const c=document.getElementById('vlist');
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Sin videos. Agrega el primero arriba.</div>';return;}
+  c.innerHTML=list.map(v=>{
+    const img=CI[v.categoria];
+    return`<div class="vr">
+      ${img?`<div class="vt"><img src="${img}" alt=""></div>`:'<div class="vt-d">🎥</div>'}
+      <div class="vi">
+        <div class="vtit">${v.titulo||'—'}</div>
+        <div class="vme">${v.instructor||''} ${v.duracion?'· '+v.duracion:''} · <a href="https://youtu.be/${v.youtubeUrl}" target="_blank" style="color:var(--pu)">Ver ↗</a></div>
+      </div>
+      <span class="vc">${CN[v.categoria]||v.categoria||'—'}</span>
+      <button class="ab ab-del" onclick="dV('${v.id}')">🗑️ Eliminar</button>
+    </div>`;
+  }).join('');
+}
+window.addV=async()=>{
+  const t=document.getElementById('vt').value.trim(),u=document.getElementById('vu').value.trim();
+  if(!t||!u){toast('⚠️ Título y URL son obligatorios');return;}
+  let id=u;const m=u.match(/(?:youtu\.be\/|v=|\/embed\/)([a-zA-Z0-9_-]{11})/);if(m)id=m[1];
+  try{await addDoc(collection(db,'videos_club'),{
+    titulo:t,categoria:document.getElementById('vc').value,youtubeUrl:id,
+    instructor:document.getElementById('vi').value.trim(),
+    duracion:document.getElementById('vd').value.trim(),
+    etiqueta:document.getElementById('vtg').value,fechaSubida:serverTimestamp()});
+    toast('✅ Video agregado — visible para clientes en tiempo real',true);
+    ['vt','vu','vi','vd'].forEach(x=>document.getElementById(x).value='');
+    loadV();}
+  catch{toast('❌ Error al guardar');}
+};
+window.dV=id=>confirm2('¿Eliminar este video de la biblioteca?',async()=>{
+  await deleteDoc(doc(db,'videos_club',id));toast('🗑️ Video eliminado');loadV();});
 
-  // ── LOAD ALL ──────────────────────────────────────────
-  async function loadAll(){
-    await Promise.all([loadMembers(), loadVideos(), loadFeed(), loadSesion()]);
-  }
+// FEED
+const TM={video:'tv',pdf:'tp',live:'tl',nuevo:'tn'};
+const TL={video:'● Video',pdf:'● PDF',live:'● En vivo',nuevo:'Nuevo'};
+async function loadF(){
+  try{const s=await getDocs(collection(db,'feed_semanal'));
+    rF(s.docs.map(d=>({id:d.id,...d.data()})));}catch{rF([]);}
+}
+function rF(list){
+  const c=document.getElementById('flist');
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Feed vacío.</div>';return;}
+  c.innerHTML=list.map(f=>`<div class="fr">
+    <span class="fd">${f.dia||'—'}</span>
+    <div class="fc"><div class="ft">${f.titulo||'—'}</div><div class="fm">${f.meta||''}</div></div>
+    <span class="${TM[f.tipo]||'tn'}">${TL[f.tipo]||f.tipo}</span>
+    <button class="ab ab-del" onclick="dF('${f.id}')">🗑️</button>
+  </div>`).join('');
+}
+window.addF=async()=>{
+  const t=document.getElementById('ftt').value.trim();
+  if(!t){toast('⚠️ Escribe el título');return;}
+  try{await addDoc(collection(db,'feed_semanal'),{
+    dia:document.getElementById('fd').value,tipo:document.getElementById('ftp').value,
+    titulo:t,meta:document.getElementById('fm').value.trim(),creado:serverTimestamp()});
+    toast('✅ Agregado al feed — visible para clientes ahora',true);
+    document.getElementById('ftt').value='';document.getElementById('fm').value='';
+    loadF();}
+  catch{toast('❌ Error');}
+};
+window.dF=id=>confirm2('¿Eliminar este ítem del feed?',async()=>{
+  await deleteDoc(doc(db,'feed_semanal',id));toast('🗑️ Eliminado');loadF();});
+window.clrF=()=>confirm2('¿Limpiar todo el feed de esta semana?',async()=>{
+  const s=await getDocs(collection(db,'feed_semanal'));
+  await Promise.all(s.docs.map(d=>deleteDoc(d.ref)));
+  toast('✅ Feed limpiado',true);loadF();});
 
-  // ── MIEMBROS ──────────────────────────────────────────
-  async function loadMembers(){
-    try{
-      const snap=await getDocs(collection(db,'usuarios'));
-      allMembers=snap.docs.map(d=>({id:d.id,...d.data()}));
-      const total=allMembers.length;
-      const activos=allMembers.filter(m=>m.membresiaActiva||m.estado==='activo').length;
-      const pend=total-activos;
-      document.getElementById('stTotal').textContent=total;
-      document.getElementById('stActivos').textContent=activos;
-      document.getElementById('stPend').textContent=pend;
-      document.getElementById('sbTotal').textContent=total;
-      renderMembers(allMembers);
-      renderRecent(allMembers.slice(0,6));
-    }catch(e){st('❌ Error cargando miembros');}
-  }
+// SESION
+async function loadS(){
+  try{const s=await getDoc(doc(db,'config','proxima_sesion'));
+    if(s.exists()){const d=s.data();
+      document.getElementById('st').value=d.titulo||'';
+      document.getElementById('si').value=d.instructor||'';
+      document.getElementById('sf').value=d.fecha||'';
+      document.getElementById('sh').value=d.hora||'';
+      if(d.fechaExacta)document.getElementById('se').value=d.fechaExacta;
+      updPrev(d.titulo,d.instructor,d.fecha,d.hora);}}catch{}
+}
+function updPrev(t,i,f,h){
+  document.getElementById('lpt').textContent=t||'Título de la sesión';
+  document.getElementById('lpm').textContent=`${i||'Instructor'} · ${f||'Fecha'} · ${h||'Hora'}`;
+}
+window.saveS=async()=>{
+  const t=document.getElementById('st').value.trim();
+  if(!t){toast('⚠️ Escribe el título');return;}
+  try{await setDoc(doc(db,'config','proxima_sesion'),{
+    titulo:t,instructor:document.getElementById('si').value.trim(),
+    fecha:document.getElementById('sf').value.trim(),hora:document.getElementById('sh').value.trim(),
+    fechaExacta:document.getElementById('se').value,actualizado:serverTimestamp()});
+    toast('✅ Sesión guardada — el cronómetro se actualiza en tiempo real',true);
+    updPrev(t,document.getElementById('si').value,document.getElementById('sf').value,document.getElementById('sh').value);}
+  catch{toast('❌ Error al guardar');}
+};
+['st','si','sf','sh'].forEach(id=>document.getElementById(id)?.addEventListener('input',()=>
+  updPrev(document.getElementById('st').value,document.getElementById('si').value,
+          document.getElementById('sf').value,document.getElementById('sh').value)));
 
-  function renderMembers(list){
-    const tb=document.getElementById('membersTbl');
-    if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">Sin miembros aún</td></tr>';return;}
-    tb.innerHTML=list.map(m=>{
-      const ok=m.membresiaActiva||m.estado==='activo';
-      const f=m.fechaRegistro?.toDate?m.fechaRegistro.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'—';
-      return`<tr>
-        <td><div class="mn">${m.nombre||'—'}</div></td>
-        <td><div class="me">${m.email||'—'}</div></td>
-        <td><span class="pchip">${m.planLabel||'Plan Mensual'}</span></td>
-        <td><span class="schip ${ok?'sc-a':'sc-p'}">${ok?'✓ Activo':'⏳ Pendiente'}</span></td>
-        <td style="font-size:.8rem;color:var(--muted)">${f}</td>
-        <td>${ok
-          ?`<button class="abtn abtn-off" onclick="toggleM('${m.id}',false)">Desactivar</button>`
-          :`<button class="abtn abtn-on"  onclick="toggleM('${m.id}',true)">Activar</button>`}
-        </td>
-      </tr>`;
-    }).join('');
-  }
+// CONFIRM MODAL
+let PA=null;
+function confirm2(msg,cb){document.getElementById('moMsg').textContent=msg;PA=cb;document.getElementById('mo').classList.add('show');}
+window.cmo=()=>{document.getElementById('mo').classList.remove('show');PA=null;};
+document.getElementById('moBtn').onclick=async()=>{if(PA){await PA();PA=null;}cmo();};
 
-  function renderRecent(list){
-    const tb=document.getElementById('recentTbl');
-    if(!list.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted)">Sin registros aún</td></tr>';return;}
-    tb.innerHTML=list.map(m=>{
-      const ok=m.membresiaActiva||m.estado==='activo';
-      const f=m.fechaRegistro?.toDate?m.fechaRegistro.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'—';
-      return`<tr>
-        <td><div class="mn">${m.nombre||'—'}</div><div class="me">${m.email||'—'}</div></td>
-        <td><span class="pchip">${m.planLabel||'Plan Mensual'}</span></td>
-        <td><span class="schip ${ok?'sc-a':'sc-p'}">${ok?'✓ Activo':'⏳ Pendiente'}</span></td>
-        <td style="font-size:.8rem;color:var(--muted)">${f}</td>
-      </tr>`;
-    }).join('');
-  }
-
-  window.filterM=(q)=>{
-    const f=allMembers.filter(m=>(m.nombre||'').toLowerCase().includes(q.toLowerCase())||(m.email||'').toLowerCase().includes(q.toLowerCase()));
-    renderMembers(f);
-  };
-
-  window.toggleM=async(uid,activate)=>{
-    try{
-      await updateDoc(doc(db,'usuarios',uid),{membresiaActiva:activate,estado:activate?'activo':'inactivo'});
-      st(activate?'✅ Membresía activada':'⚠️ Membresía desactivada',activate);
-      loadMembers();
-    }catch(e){st('❌ Error al actualizar');}
-  };
-
-  // ── VIDEOS ────────────────────────────────────────────
-  const catN={endo:'Endocrinología',onco:'Oncología',hema:'Hematología',otro:'Otro'};
-  const catImg={endo:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/endocrinologia.png',onco:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/oncologia.png',hema:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/hematologia.png'};
-
-  async function loadVideos(){
-    try{
-      const snap=await getDocs(collection(db,'videos_club'));
-      allVideos=snap.docs.map(d=>({id:d.id,...d.data()}));
-      document.getElementById('stVideos').textContent=allVideos.length;
-      document.getElementById('sbVideos').textContent=allVideos.length;
-      renderVideos(allVideos);
-    }catch(e){renderVideos([]);}
-  }
-
-  function renderVideos(list){
-    const c=document.getElementById('videosList');
-    if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted)">No hay videos aún. Agrega el primero arriba.</div>';return;}
-    c.innerHTML=list.map(v=>{
-      const img=catImg[v.categoria];
-      return`<div class="vrow">
-        ${img?`<div class="vthumb"><img src="${img}" alt=""></div>`:'<div class="vthumb-def">🎥</div>'}
-        <div class="vinfo">
-          <div class="vtitle">${v.titulo||'—'}</div>
-          <div class="vmeta">${v.instructor||''} · <a href="https://youtu.be/${v.youtubeUrl}" target="_blank" style="color:var(--purple)">Ver en YouTube ↗</a></div>
-        </div>
-        <span class="vcat">${catN[v.categoria]||v.categoria||'—'}</span>
-        <button class="abtn abtn-del" onclick="delVideo('${v.id}')">🗑️ Eliminar</button>
-      </div>`;
-    }).join('');
-  }
-
-  window.addVideo=async()=>{
-    const t=document.getElementById('vTitulo').value.trim();
-    const u=document.getElementById('vUrl').value.trim();
-    if(!t||!u){st('⚠️ Título y URL son obligatorios');return;}
-    let ytId=u;
-    const m=u.match(/(?:youtu\.be\/|v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
-    if(m)ytId=m[1];
-    try{
-      await addDoc(collection(db,'videos_club'),{
-        titulo:t, categoria:document.getElementById('vCat').value,
-        youtubeUrl:ytId, instructor:document.getElementById('vInst').value.trim(),
-        duracion:document.getElementById('vDur').value.trim(),
-        etiqueta:document.getElementById('vTag').value,
-        fechaSubida:serverTimestamp()
-      });
-      st('✅ Video agregado',true);
-      ['vTitulo','vUrl','vInst','vDur'].forEach(id=>document.getElementById(id).value='');
-      loadVideos();
-    }catch(e){st('❌ Error al guardar');}
-  };
-
-  window.delVideo=(id)=>confirmAction(`¿Eliminar este video de la biblioteca?`,async()=>{
-    await deleteDoc(doc(db,'videos_club',id));
-    st('🗑️ Video eliminado');loadVideos();
-  });
-
-  // ── FEED SEMANAL ──────────────────────────────────────
-  async function loadFeed(){
-    try{
-      const snap=await getDocs(collection(db,'feed_semanal'));
-      allFeed=snap.docs.map(d=>({id:d.id,...d.data()}));
-      renderFeed(allFeed);
-    }catch(e){renderFeed([]);}
-  }
-
-  const tagMap={video:'tag-v',pdf:'tag-p',live:'tag-l',nuevo:'tag-n'};
-  const tagLabel={video:'● Video',pdf:'● PDF',live:'● En vivo',nuevo:'Nuevo'};
-
-  function renderFeed(list){
-    const c=document.getElementById('feedList');
-    if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted)">Feed vacío. Agrega contenido arriba.</div>';return;}
-    c.innerHTML=list.map(f=>`
-      <div class="feed-item">
-        <span class="feed-day-badge">${f.dia||'—'}</span>
-        <div class="feed-content">
-          <div class="feed-title-txt">${f.titulo||'—'}</div>
-          <div class="feed-meta-txt">${f.meta||''}</div>
-        </div>
-        <span class="${tagMap[f.tipo]||'tag-n'}">${tagLabel[f.tipo]||f.tipo}</span>
-        <button class="abtn abtn-del" onclick="delFeed('${f.id}')">🗑️</button>
-      </div>`).join('');
-  }
-
-  window.addFeedItem=async()=>{
-    const t=document.getElementById('fTitulo').value.trim();
-    if(!t){st('⚠️ Escribe el título del contenido');return;}
-    try{
-      await addDoc(collection(db,'feed_semanal'),{
-        dia:document.getElementById('fDia').value,
-        tipo:document.getElementById('fTipo').value,
-        titulo:t,
-        meta:document.getElementById('fMeta').value.trim(),
-        creado:serverTimestamp()
-      });
-      st('✅ Agregado al feed',true);
-      document.getElementById('fTitulo').value='';
-      document.getElementById('fMeta').value='';
-      loadFeed();
-    }catch(e){st('❌ Error al guardar');}
-  };
-
-  window.delFeed=(id)=>confirmAction('¿Eliminar este ítem del feed?',async()=>{
-    await deleteDoc(doc(db,'feed_semanal',id));
-    st('🗑️ Eliminado');loadFeed();
-  });
-
-  window.clearFeed=()=>confirmAction('¿Limpiar todo el feed de esta semana?',async()=>{
-    const snap=await getDocs(collection(db,'feed_semanal'));
-    await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
-    st('✅ Feed limpiado',true);loadFeed();
-  });
-
-  // ── PRÓXIMA SESIÓN ────────────────────────────────────
-  async function loadSesion(){
-    try{
-      const snap=await getDoc(doc(db,'config','proxima_sesion'));
-      if(snap.exists()){
-        const d=snap.data();
-        document.getElementById('sTitle').value=d.titulo||'';
-        document.getElementById('sInst').value=d.instructor||'';
-        document.getElementById('sFecha').value=d.fecha||'';
-        document.getElementById('sHora').value=d.hora||'';
-        if(d.fechaExacta) document.getElementById('sFechaExacta').value=d.fechaExacta;
-        updateLivePreview(d.titulo,d.instructor,d.fecha,d.hora);
-      }
-    }catch(e){}
-  }
-
-  function updateLivePreview(t,inst,f,h){
-    document.getElementById('lpTitle').textContent=t||'Título de la sesión';
-    document.getElementById('lpMeta').textContent=`${inst||'Instructor'} · ${f||'Fecha'} · ${h||'Hora'}`;
-  }
-
-  window.saveSesion=async()=>{
-    const t=document.getElementById('sTitle').value.trim();
-    const inst=document.getElementById('sInst').value.trim();
-    const f=document.getElementById('sFecha').value.trim();
-    const h=document.getElementById('sHora').value.trim();
-    const fe=document.getElementById('sFechaExacta').value;
-    if(!t){st('⚠️ Escribe el título de la sesión');return;}
-    try{
-      await setDoc(doc(db,'config','proxima_sesion'),{titulo:t,instructor:inst,fecha:f,hora:h,fechaExacta:fe,actualizado:serverTimestamp()});
-      st('✅ Sesión guardada',true);
-      updateLivePreview(t,inst,f,h);
-    }catch(e){st('❌ Error al guardar');}
-  };
-
-  // Actualizar preview en tiempo real
-  ['sTitle','sInst','sFecha','sHora'].forEach(id=>{
-    document.getElementById(id)?.addEventListener('input',()=>{
-      updateLivePreview(
-        document.getElementById('sTitle').value,
-        document.getElementById('sInst').value,
-        document.getElementById('sFecha').value,
-        document.getElementById('sHora').value
-      );
-    });
-  });
-
-  // ── CONFIRM MODAL ─────────────────────────────────────
-  let pendingAction=null;
-  function confirmAction(msg,cb){
-    document.getElementById('confirmMsg').textContent=msg;
-    pendingAction=cb;
-    document.getElementById('confirmModal').classList.add('show');
-  }
-  window.closeModal=()=>{document.getElementById('confirmModal').classList.remove('show');pendingAction=null;};
-  document.getElementById('confirmBtn').onclick=async()=>{
-    if(pendingAction){await pendingAction();pendingAction=null;}
-    closeModal();
-  };
-
-  // ── TOAST ─────────────────────────────────────────────
-  function st(msg,green){
-    const t=document.getElementById('toastEl');t.textContent=msg;
-    t.className='toast show'+(green?' green':'');
-    setTimeout(()=>t.classList.remove('show'),3500);
-  }
-  window.st=st;
+// TOAST
+function toast(msg,gr){
+  const t=document.getElementById('tst');t.textContent=msg;
+  t.className='tst show'+(gr?' gr':'');setTimeout(()=>t.classList.remove('show'),3500);}
+window.toast=toast;
 </script>
 
 <script>
-  function sp(id,btn){
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
-    document.getElementById('panel-'+id).classList.add('active');
-    if(btn)btn.classList.add('active');
-  }
-  window.sp=sp;
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Enter'){
-      const ls=document.getElementById('loginScreen');
-      if(ls&&ls.style.display!=='none')window.doLogin?.();
-    }
-  });
+function sp(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('p-'+id).classList.add('on');
+  if(btn)btn.classList.add('on');
+}
+window.sp=sp;
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){const L=document.getElementById('L');if(L&&L.style.display!=='none')window.doLogin?.();}});
 </script>
 </body>
 </html>
