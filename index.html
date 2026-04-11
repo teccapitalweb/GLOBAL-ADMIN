@@ -70,7 +70,7 @@
     .sb-btn svg{flex-shrink:0;opacity:.8}
     .sb-n{margin-left:auto;font-size:.65rem;font-weight:700;padding:.1rem .42rem;
       border-radius:50px;color:#fff}
-    .sb-n.pu{background:var(--pu)}.sb-n.gr{background:var(--gr)}.sb-n.re{background:var(--re)}
+    .sb-n.pu{background:var(--pu)}.sb-n.gr{background:var(--gr)}.sb-n.re{background:var(--re)}.sb-n.go{background:var(--go)}
 
     .mn{flex:1;padding:2rem 2.2rem;min-width:0;max-width:1080px}
     .pn{display:none}.pn.on{display:block}
@@ -79,11 +79,18 @@
 
     /* STATS */
     .sts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
-    .st{background:var(--w);border-radius:15px;padding:1.25rem 1.3rem;border:1px solid var(--li)}
+    .st{background:var(--w);border-radius:15px;padding:1.25rem 1.3rem;border:1px solid var(--li);
+      position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+    .st:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
     .st-n{font-family:var(--ff);font-size:1.9rem;font-weight:700;line-height:1;margin-bottom:.2rem}
     .st-l{font-size:.79rem;color:var(--mu)}
-    .st.pu .st-n{color:var(--pu)}.st.gr .st-n{color:var(--gr)}
-    .st.re .st-n{color:var(--re)}.st.go .st-n{color:var(--go)}
+    .st-bar{position:absolute;bottom:0;left:0;height:3px;border-radius:0 0 15px 15px;width:100%}
+    .st.pu .st-n{color:var(--pu)}.st.pu .st-bar{background:var(--pu)}
+    .st.gr .st-n{color:var(--gr)}.st.gr .st-bar{background:var(--gr)}
+    .st.re .st-n{color:var(--re)}.st.re .st-bar{background:var(--re)}
+    .st.go .st-n{color:var(--go)}.st.go .st-bar{background:var(--go)}
+    .st-sub{font-size:.7rem;color:var(--mu);margin-top:.25rem;display:flex;align-items:center;gap:.3rem}
+    .st-dot{width:6px;height:6px;border-radius:50%;background:var(--gr)}
 
     /* CARD */
     .cd{background:var(--w);border-radius:18px;border:1px solid var(--li);overflow:hidden;margin-bottom:1.5rem}
@@ -128,6 +135,10 @@
     .fi{width:100%;padding:.64rem .88rem;background:#f8fbff;border:1.5px solid var(--li);
       border-radius:10px;font-size:.87rem;color:var(--dk);outline:none;transition:border-color .2s}
     .fi:focus{border-color:var(--pu);background:#fff}
+    .fi-ta{width:100%;padding:.64rem .88rem;background:#f8fbff;border:1.5px solid var(--li);
+      border-radius:10px;font-size:.87rem;color:var(--dk);outline:none;transition:border-color .2s;
+      resize:vertical;min-height:80px}
+    .fi-ta:focus{border-color:var(--pu);background:#fff}
     .fs{width:100%;padding:.64rem .88rem;border:1.5px solid var(--li);border-radius:10px;
       font-size:.87rem;color:var(--dk);background:#f8fbff;outline:none;
       appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -139,24 +150,36 @@
       border:none;border-radius:12px;padding:.72rem 1.5rem;font-family:var(--ff);
       font-size:.87rem;font-weight:700;transition:opacity .15s}
     .bm:hover{opacity:.88}
-    .bm.gr{background:var(--gr)}.bm.re{background:var(--re)}
+    .bm.gr{background:var(--gr)}.bm.re{background:var(--re)}.bm.go{background:var(--go)}
     .bs{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--dk);
       border:1.5px solid var(--li);border-radius:12px;padding:.7rem 1.3rem;
       font-family:var(--ff);font-size:.87rem;font-weight:700;transition:all .15s}
     .bs:hover{border-color:var(--pu);color:var(--pu)}
 
     /* VIDEO ROWS */
-    .vr{display:flex;align-items:center;gap:1rem;padding:.88rem 1.4rem;border-bottom:1px solid var(--li)}
+    .vr{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.4rem;border-bottom:1px solid var(--li)}
     .vr:last-child{border-bottom:none}
-    .vt{width:54px;height:40px;border-radius:9px;overflow:hidden;flex-shrink:0}
+    .vt{width:64px;height:48px;border-radius:9px;overflow:hidden;flex-shrink:0}
     .vt img{width:100%;height:100%;object-fit:cover}
-    .vt-d{width:54px;height:40px;border-radius:9px;background:linear-gradient(135deg,#12103a,#4f35b3);
-      display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .vt-d{width:64px;height:48px;border-radius:9px;background:linear-gradient(135deg,#12103a,#4f35b3);
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
     .vi{flex:1;min-width:0}
-    .vtit{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .vme{font-size:.74rem;color:var(--mu)}
+    .vtit{font-size:.9rem;font-weight:700;margin-bottom:.18rem}
+    .vme{font-size:.74rem;color:var(--mu);margin-bottom:.25rem}
+    .vtm{font-size:.74rem;color:var(--mu);background:#f4f4f8;border-radius:6px;
+      padding:.3rem .6rem;margin-top:.3rem;border-left:3px solid var(--pu);white-space:pre-wrap}
     .vc{font-size:.7rem;font-weight:700;padding:.14rem .5rem;border-radius:50px;
       background:var(--pl);color:var(--pu);white-space:nowrap;flex-shrink:0}
+    .vr-actions{display:flex;align-items:center;gap:.4rem;flex-shrink:0;margin-top:.1rem}
+
+    /* PDF ROWS */
+    .pr{display:flex;align-items:center;gap:1rem;padding:.9rem 1.4rem;border-bottom:1px solid var(--li)}
+    .pr:last-child{border-bottom:none}
+    .pi{width:44px;height:44px;border-radius:9px;background:linear-gradient(135deg,#4f35b3,#6c4fd6);
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .pt{flex:1;min-width:0}
+    .pt-n{font-size:.88rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pt-m{font-size:.74rem;color:var(--mu)}
 
     /* FEED ROWS */
     .fr{display:flex;align-items:center;gap:1rem;padding:.95rem 1.4rem;border-bottom:1px solid var(--li)}
@@ -177,6 +200,24 @@
       padding:1.5rem;color:#fff;margin-bottom:1rem}
     .lvc-t{font-family:var(--ff);font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
     .lvc-m{font-size:.83rem;color:rgba(255,255,255,.6)}
+    .lvc-timer{display:flex;gap:1rem;margin-top:.8rem}
+    .lvc-u{text-align:center}
+    .lvc-un{font-family:var(--ff);font-size:1.4rem;font-weight:700;
+      background:rgba(255,255,255,.15);border-radius:10px;padding:.3rem .65rem;min-width:52px;display:block}
+    .lvc-ul{font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:.2rem}
+
+    /* RESUMEN ACTIVIDAD */
+    .act-row{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.4rem;border-bottom:1px solid var(--li)}
+    .act-row:last-child{border-bottom:none}
+    .act-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;
+      justify-content:center;font-size:.95rem;flex-shrink:0}
+    .act-d{flex:1;min-width:0}
+    .act-n{font-size:.87rem;font-weight:700}
+    .act-m{font-size:.74rem;color:var(--mu)}
+    .act-t{font-size:.74rem;color:var(--mu);white-space:nowrap}
+    .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gr);
+      animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 
     /* TOAST */
     .tst{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
@@ -199,6 +240,12 @@
       font-size:1rem;display:flex;align-items:center;justify-content:center}
     .mb-b{padding:1.3rem 1.4rem}
     .mb-f{padding:.85rem 1.4rem;border-top:1px solid var(--li);display:flex;gap:.6rem;justify-content:flex-end}
+
+    /* NOTIFY BANNER */
+    .ntf-tip{background:linear-gradient(135deg,rgba(79,53,179,.08),rgba(79,53,179,.03));
+      border:1px solid rgba(79,53,179,.15);border-radius:12px;padding:.9rem 1.2rem;
+      display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;font-size:.82rem}
+    .ntf-ico{font-size:1.2rem}
 
     @media(max-width:900px){.sts{grid-template-columns:1fr 1fr}.sb{display:none}.mn{padding:1.2rem}}
   </style>
@@ -227,6 +274,7 @@
       <span class="nav-bd">Admin</span>
     </div>
     <div class="nav-r">
+      <span class="pulse"></span>
       <span class="nav-u" id="nu"></span>
       <button class="nav-out" onclick="doLogout()">Salir</button>
     </div>
@@ -251,6 +299,11 @@
         Videos
         <span class="sb-n gr" id="sbv">0</span>
       </button>
+      <button class="sb-btn" onclick="sp('p',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        PDFs
+        <span class="sb-n pu" id="sbp">0</span>
+      </button>
       <button class="sb-btn" onclick="sp('f',this)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         Feed semanal
@@ -259,25 +312,62 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Próxima sesión
       </button>
+      <div class="sb-lbl">Notificaciones</div>
+      <button class="sb-btn" onclick="sp('n',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Enviar notificación
+      </button>
     </aside>
 
     <main class="mn">
 
       <!-- RESUMEN -->
       <div class="pn on" id="p-r">
-        <div class="ptit">📊 Resumen del Club</div>
+        <div class="ptit">📊 Resumen del Club <span class="pulse" style="margin-left:.3rem"></span></div>
         <div class="sts">
-          <div class="st pu"><div class="st-n" id="stt">—</div><div class="st-l">Miembros totales</div></div>
-          <div class="st gr"><div class="st-n" id="sta">—</div><div class="st-l">Activos</div></div>
-          <div class="st re"><div class="st-n" id="stp">—</div><div class="st-l">Pendientes</div></div>
-          <div class="st go"><div class="st-n" id="stv">—</div><div class="st-l">Videos en biblioteca</div></div>
-        </div>
-        <div class="cd">
-          <div class="cd-h"><div class="cd-t">👥 Últimos registros</div></div>
-          <div class="cd-b np">
-            <table class="tb"><thead><tr><th>Miembro</th><th>Plan</th><th>Estado</th><th>Fecha</th></tr></thead>
-            <tbody id="rtb"><tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</td></tr></tbody></table>
+          <div class="st pu">
+            <div class="st-n" id="stt">—</div>
+            <div class="st-l">Miembros totales</div>
+            <div class="st-sub"><span class="st-dot"></span><span id="stt-sub">actualizando…</span></div>
+            <div class="st-bar"></div>
           </div>
+          <div class="st gr">
+            <div class="st-n" id="sta">—</div>
+            <div class="st-l">Activos</div>
+            <div class="st-sub"><span class="st-dot"></span>Membresía vigente</div>
+            <div class="st-bar"></div>
+          </div>
+          <div class="st re">
+            <div class="st-n" id="stp">—</div>
+            <div class="st-l">Pendientes</div>
+            <div class="st-sub"><span class="st-dot" style="background:var(--re)"></span>Sin activar</div>
+            <div class="st-bar"></div>
+          </div>
+          <div class="st go">
+            <div class="st-n" id="stv">—</div>
+            <div class="st-l">Contenidos publicados</div>
+            <div class="st-sub"><span class="st-dot" style="background:var(--go)"></span><span id="stv-sub">videos + PDFs</span></div>
+            <div class="st-bar"></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+          <div class="cd">
+            <div class="cd-h"><div class="cd-t">👥 Últimos registros</div></div>
+            <div class="cd-b np">
+              <table class="tb"><thead><tr><th>Miembro</th><th>Plan</th><th>Estado</th><th>Fecha</th></tr></thead>
+              <tbody id="rtb"><tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</td></tr></tbody></table>
+            </div>
+          </div>
+          <div class="cd">
+            <div class="cd-h"><div class="cd-t">📅 Actividad reciente del Club</div></div>
+            <div class="cd-b np" id="act-list"><div style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</div></div>
+          </div>
+        </div>
+
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">📡 Estado de la próxima sesión en vivo</div></div>
+          <div class="cd-b" id="r-sesion" style="font-size:.86rem;color:var(--mu)">Cargando…</div>
         </div>
       </div>
 
@@ -291,7 +381,7 @@
           </div>
           <div class="cd-b np">
             <table class="tb">
-              <thead><tr><th>Nombre</th><th>Email</th><th>Plan</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr></thead>
+              <thead><tr><th>Nombre</th><th>Email</th><th>Plan</th><th>Estado</th><th>Fecha registro</th><th>Acción</th></tr></thead>
               <tbody id="mtb"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</td></tr></tbody>
             </table>
           </div>
@@ -301,12 +391,16 @@
       <!-- VIDEOS -->
       <div class="pn" id="p-v">
         <div class="ptit">🎬 Videos del Club</div>
+        <div class="ntf-tip">
+          <span class="ntf-ico">💡</span>
+          <span>Cuando agregues un video, los miembros recibirán una notificación por email automáticamente.</span>
+        </div>
         <div class="cd">
           <div class="cd-h"><div class="cd-t">➕ Agregar nuevo video</div></div>
           <div class="cd-b">
             <div class="fg">
-              <div><label class="fl">Título del video</label><input class="fi" type="text" id="vt" placeholder="Ej: Diagnóstico diferencial canino"></div>
-              <div><label class="fl">Categoría</label>
+              <div><label class="fl">Título del video *</label><input class="fi" type="text" id="vt" placeholder="Ej: Diagnóstico diferencial canino"></div>
+              <div><label class="fl">Categoría / Curso</label>
                 <select class="fs" id="vc">
                   <option value="endo">Endocrinología canina básica</option>
                   <option value="onco">Bases de oncología veterinaria</option>
@@ -314,32 +408,81 @@
                   <option value="otro">Otro / Nuevo curso</option>
                 </select>
               </div>
-              <div><label class="fl">URL de YouTube</label><input class="fi" type="url" id="vu" placeholder="https://youtu.be/XXXXXXX"></div>
-              <div><label class="fl">Instructor</label><input class="fi" type="text" id="vi" placeholder="MVZ. Juan Pérez"></div>
+              <div><label class="fl">URL de YouTube *</label><input class="fi" type="url" id="vu" placeholder="https://youtu.be/XXXXXXX"></div>
+              <div><label class="fl">Instructor / Ponente</label><input class="fi" type="text" id="vi" placeholder="MVZ. Juan Pérez"></div>
               <div><label class="fl">Duración</label><input class="fi" type="text" id="vd" placeholder="42 min"></div>
               <div><label class="fl">Etiqueta</label>
                 <select class="fs" id="vtg">
                   <option value="nuevo">🆕 Nuevo</option>
                   <option value="">Sin etiqueta</option>
-                  <option value="visto">Visto</option>
+                  <option value="destacado">⭐ Destacado</option>
                 </select>
+              </div>
+              <div class="fsp"><label class="fl">Temario del curso (resumen de temas)</label>
+                <textarea class="fi-ta" id="vtm" placeholder="Tema 1: Introducción a la endocrinología&#10;Tema 2: Diagnóstico diferencial&#10;Tema 3: Tratamiento y seguimiento…"></textarea>
+              </div>
+              <div class="fsp"><label class="fl">Descripción / Información adicional</label>
+                <textarea class="fi-ta" id="vdesc" placeholder="Breve descripción del contenido, objetivos de aprendizaje, nivel recomendado…"></textarea>
               </div>
             </div>
             <button class="bm" onclick="addV()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Agregar video al Club
+              Publicar video en el Club
             </button>
           </div>
         </div>
         <div class="cd">
-          <div class="cd-h"><div class="cd-t">📚 Biblioteca actual</div></div>
+          <div class="cd-h"><div class="cd-t">📚 Biblioteca actual</div><span class="sb-n gr" id="sbv2" style="font-size:.72rem;padding:.2rem .6rem">0 videos</span></div>
           <div class="cd-b np" id="vlist"><div style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</div></div>
+        </div>
+      </div>
+
+      <!-- PDFs -->
+      <div class="pn" id="p-p">
+        <div class="ptit">📄 PDFs del Club</div>
+        <div class="ntf-tip">
+          <span class="ntf-ico">💡</span>
+          <span>Los PDFs son descargables para los miembros. Agrega guías, protocolos y materiales de cada curso.</span>
+        </div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">➕ Agregar nuevo PDF</div></div>
+          <div class="cd-b">
+            <div class="fg">
+              <div><label class="fl">Título del PDF *</label><input class="fi" type="text" id="pt" placeholder="Guía clínica de endocrinología"></div>
+              <div><label class="fl">Categoría / Curso</label>
+                <select class="fs" id="pc">
+                  <option value="endo">Endocrinología canina básica</option>
+                  <option value="onco">Bases de oncología veterinaria</option>
+                  <option value="hema">Hematología clínica</option>
+                  <option value="general">Material general</option>
+                </select>
+              </div>
+              <div><label class="fl">Enlace al PDF (Google Drive / Dropbox) *</label>
+                <input class="fi" type="url" id="pu" placeholder="https://drive.google.com/file/d/…/view"></div>
+              <div><label class="fl">Número de páginas</label><input class="fi" type="text" id="pp" placeholder="12 páginas"></div>
+              <div class="fsp"><label class="fl">Descripción del contenido</label>
+                <textarea class="fi-ta" id="pdesc" placeholder="Breve descripción del PDF: qué contiene, para qué sirve, a qué curso pertenece…"></textarea>
+              </div>
+            </div>
+            <button class="bm" onclick="addP()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Publicar PDF en el Club
+            </button>
+          </div>
+        </div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">📂 PDFs publicados</div><span class="sb-n pu" id="sbp2" style="font-size:.72rem;padding:.2rem .6rem">0 PDFs</span></div>
+          <div class="cd-b np" id="plist"><div style="text-align:center;padding:2rem;color:var(--mu)">Cargando…</div></div>
         </div>
       </div>
 
       <!-- FEED -->
       <div class="pn" id="p-f">
         <div class="ptit">📅 Feed semanal</div>
+        <div class="ntf-tip">
+          <span class="ntf-ico">📢</span>
+          <span>Todo lo que agregues aquí aparece en tiempo real en el dashboard de tus miembros bajo "Nuevo esta semana".</span>
+        </div>
         <div class="cd">
           <div class="cd-h"><div class="cd-t">✏️ Agregar contenido a la semana</div></div>
           <div class="cd-b">
@@ -350,16 +493,16 @@
                   <option>Jueves</option><option>Viernes</option><option>Nuevo hoy</option>
                 </select>
               </div>
-              <div><label class="fl">Tipo</label>
+              <div><label class="fl">Tipo de contenido</label>
                 <select class="fs" id="ftp">
                   <option value="video">🎥 Video</option>
                   <option value="pdf">📄 PDF</option>
                   <option value="live">🔴 En vivo</option>
-                  <option value="nuevo">✨ Nuevo</option>
+                  <option value="nuevo">✨ Destacado</option>
                 </select>
               </div>
-              <div><label class="fl">Meta (instructor, duración…)</label><input class="fi" type="text" id="fm" placeholder="Dr. Morales · 12 min"></div>
-              <div class="fsp"><label class="fl">Título del contenido</label><input class="fi" type="text" id="ftt" placeholder="Diagnóstico diferencial: vómito crónico en felinos"></div>
+              <div><label class="fl">Instructor / Duración / Info</label><input class="fi" type="text" id="fm" placeholder="Dr. Morales · 12 min"></div>
+              <div class="fsp"><label class="fl">Título del contenido *</label><input class="fi" type="text" id="ftt" placeholder="Diagnóstico diferencial: vómito crónico en felinos"></div>
             </div>
             <button class="bm" onclick="addF()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -379,27 +522,75 @@
       <!-- SESION -->
       <div class="pn" id="p-s">
         <div class="ptit">📡 Próxima sesión en vivo</div>
+        <div class="ntf-tip">
+          <span class="ntf-ico">⏱️</span>
+          <span>El cronómetro regresivo se actualiza automáticamente en el panel de cada miembro al guardar.</span>
+        </div>
         <div class="cd" style="margin-bottom:1.5rem">
           <div class="cd-h"><div class="cd-t">✏️ Configurar sesión</div></div>
           <div class="cd-b">
             <div class="fg">
-              <div><label class="fl">Título</label><input class="fi" type="text" id="st" placeholder="Q&A Endocrinología"></div>
-              <div><label class="fl">Instructor</label><input class="fi" type="text" id="si" placeholder="Dr. Juárez"></div>
-              <div><label class="fl">Fecha (texto)</label><input class="fi" type="text" id="sf" placeholder="23 de abril"></div>
-              <div><label class="fl">Hora</label><input class="fi" type="text" id="sh" placeholder="8:00 PM"></div>
-              <div class="fsp"><label class="fl">Fecha/hora exacta para cronómetro</label><input class="fi" type="datetime-local" id="se"></div>
+              <div><label class="fl">Título de la sesión *</label><input class="fi" type="text" id="st" placeholder="Q&A Endocrinología con Dr. Juárez"></div>
+              <div><label class="fl">Instructor / Ponente</label><input class="fi" type="text" id="si" placeholder="Dr. Alejandro Juárez"></div>
+              <div><label class="fl">Fecha (texto visible)</label><input class="fi" type="text" id="sf" placeholder="Mié 23 de abril"></div>
+              <div><label class="fl">Hora (texto visible)</label><input class="fi" type="text" id="sh" placeholder="8:00 PM hora México"></div>
+              <div><label class="fl">Enlace Zoom / Meet / YouTube Live</label><input class="fi" type="url" id="sl" placeholder="https://zoom.us/j/..."></div>
+              <div class="fsp"><label class="fl">Fecha y hora exacta para el cronómetro regresivo</label><input class="fi" type="datetime-local" id="se"></div>
             </div>
             <button class="bm gr" onclick="saveS()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Guardar sesión — se actualiza en tiempo real
+              Guardar — cronómetro se actualiza en tiempo real
             </button>
           </div>
         </div>
         <div class="lvc">
-          <div style="font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem">Vista previa en el dashboard</div>
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem">Vista previa en el dashboard del miembro</div>
           <div class="lvc-t" id="lpt">Q&A Endocrinología</div>
           <div class="lvc-m" id="lpm">Dr. Juárez · 23 de abril · 8:00 PM</div>
-          <div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.5rem">El cronómetro se calcula automáticamente desde la fecha exacta.</div>
+          <div class="lvc-timer">
+            <div class="lvc-u"><span class="lvc-un" id="pv-dd">00</span><div class="lvc-ul">Días</div></div>
+            <div class="lvc-u"><span class="lvc-un" id="pv-hh">00</span><div class="lvc-ul">Hrs</div></div>
+            <div class="lvc-u"><span class="lvc-un" id="pv-mm">00</span><div class="lvc-ul">Min</div></div>
+            <div class="lvc-u"><span class="lvc-un" id="pv-ss">00</span><div class="lvc-ul">Seg</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTIFICACIONES -->
+      <div class="pn" id="p-n">
+        <div class="ptit">🔔 Enviar notificación a miembros</div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">📧 Nueva notificación por email</div></div>
+          <div class="cd-b">
+            <div class="fg">
+              <div class="fsp"><label class="fl">Asunto del email *</label>
+                <input class="fi" type="text" id="ns" placeholder="Nuevo contenido disponible en Club GlobalVet"></div>
+              <div><label class="fl">Tipo de notificación</label>
+                <select class="fs" id="ntp">
+                  <option value="nuevo_video">🎥 Nuevo video publicado</option>
+                  <option value="nuevo_pdf">📄 Nuevo PDF disponible</option>
+                  <option value="sesion_vivo">📡 Recordatorio sesión en vivo</option>
+                  <option value="general">📢 Anuncio general</option>
+                </select>
+              </div>
+              <div><label class="fl">Título del contenido (opcional)</label>
+                <input class="fi" type="text" id="nct" placeholder="Endocrinología canina básica"></div>
+              <div class="fsp"><label class="fl">Mensaje principal *</label>
+                <textarea class="fi-ta" id="nm" style="min-height:110px" placeholder="Estimado miembro de Club GlobalVet,&#10;&#10;Tenemos nuevo contenido disponible exclusivamente para ti. Ingresa ahora a tu panel para accederlo…"></textarea>
+              </div>
+            </div>
+            <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+              <button class="bm" onclick="sendNotif()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Enviar a todos los miembros activos
+              </button>
+              <span style="font-size:.8rem;color:var(--mu)">Se enviará a <strong id="n-count">—</strong> miembros activos</span>
+            </div>
+          </div>
+        </div>
+        <div class="cd">
+          <div class="cd-h"><div class="cd-t">📜 Historial de notificaciones</div></div>
+          <div class="cd-b np" id="nlist"><div style="text-align:center;padding:2rem;color:var(--mu)">Sin notificaciones enviadas aún</div></div>
         </div>
       </div>
 
@@ -407,12 +598,12 @@
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL CONFIRMACIÓN -->
 <div class="mo" id="mo">
   <div class="mb">
-    <div class="mb-h"><div class="mb-t">⚠️ Confirmar</div><button class="mb-x" onclick="cmo()">✕</button></div>
+    <div class="mb-h"><div class="mb-t">⚠️ Confirmar acción</div><button class="mb-x" onclick="cmo()">✕</button></div>
     <div class="mb-b"><p style="font-size:.92rem;color:var(--mu)" id="moMsg"></p></div>
-    <div class="mb-f"><button class="bs" onclick="cmo()">Cancelar</button><button class="bm re" id="moBtn">Eliminar</button></div>
+    <div class="mb-f"><button class="bs" onclick="cmo()">Cancelar</button><button class="bm re" id="moBtn">Confirmar</button></div>
   </div>
 </div>
 
@@ -422,7 +613,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, addDoc, deleteDoc, serverTimestamp }
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, updateDoc,
+  addDoc, deleteDoc, serverTimestamp, onSnapshot, query, orderBy, limit }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const cfg={apiKey:"AIzaSyDw-1mNG-xj55Yb_TyHw6LFWwpptqJZJ3M",authDomain:"club-global-vet.firebaseapp.com",
@@ -430,7 +622,7 @@ const cfg={apiKey:"AIzaSyDw-1mNG-xj55Yb_TyHw6LFWwpptqJZJ3M",authDomain:"club-glo
   messagingSenderId:"448888067634",appId:"1:448888067634:web:96adc6b03ba3248f4f0e2b"};
 const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
 const ADMINS=['globalvetmexico1@gmail.com','teccapitalweb@gmail.com'];
-let AM=[],AV=[];
+let AM=[],AV=[],AP=[];
 
 // AUTH
 onAuthStateChanged(auth,u=>{
@@ -438,7 +630,7 @@ onAuthStateChanged(auth,u=>{
     document.getElementById('L').style.display='none';
     document.getElementById('A').style.display='block';
     document.getElementById('nu').textContent=u.email;
-    loadAll();
+    loadAll(); startListeners();
   }else if(u){signOut(auth);err('Sin permisos de administrador.');}
   else{document.getElementById('L').style.display='flex';document.getElementById('A').style.display='none';}
 });
@@ -453,24 +645,56 @@ window.doLogin=async()=>{
 window.doLogout=async()=>{await signOut(auth);};
 function err(m){const el=document.getElementById('le');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),4000);}
 
-async function loadAll(){await Promise.all([loadM(),loadV(),loadF(),loadS()]);}
+async function loadAll(){await Promise.all([loadM(),loadV(),loadP(),loadF(),loadS(),loadN()]);}
 
-// MIEMBROS
-async function loadM(){
-  try{
-    const s=await getDocs(collection(db,'usuarios'));
-    AM=s.docs.map(d=>({id:d.id,...d.data()}));
+// LISTENERS EN TIEMPO REAL
+function startListeners(){
+  onSnapshot(collection(db,'usuarios'),snap=>{
+    AM=snap.docs.map(d=>({id:d.id,...d.data()}));
     const t=AM.length,a=AM.filter(m=>m.membresiaActiva||m.estado==='activo').length;
     document.getElementById('stt').textContent=t;
     document.getElementById('sta').textContent=a;
     document.getElementById('stp').textContent=t-a;
     document.getElementById('sbt').textContent=t;
+    document.getElementById('stt-sub').textContent=`${a} activos hoy`;
+    document.getElementById('n-count').textContent=a;
     rM(AM);rR(AM.slice(0,6));
-  }catch{toast('❌ Error cargando miembros');}
+  });
+  onSnapshot(collection(db,'videos_club'),snap=>{
+    AV=snap.docs.map(d=>({id:d.id,...d.data()}));
+    const vp=AV.length;
+    onSnapshot(collection(db,'pdfs_club'),snapP=>{
+      AP=snapP.docs.map(d=>({id:d.id,...d.data()}));
+      const tot=vp+AP.length;
+      document.getElementById('stv').textContent=tot;
+      document.getElementById('stv-sub').textContent=`${vp} videos · ${AP.length} PDFs`;
+      document.getElementById('sbv').textContent=vp;
+      document.getElementById('sbv2').textContent=vp+' videos';
+      document.getElementById('sbp').textContent=AP.length;
+      document.getElementById('sbp2').textContent=AP.length+' PDFs';
+      rV(AV);rP(AP);rAct(AV,AP);
+    });
+  });
+  onSnapshot(collection(db,'feed_semanal'),snap=>{
+    rF(snap.docs.map(d=>({id:d.id,...d.data()})));
+  });
+  onSnapshot(doc(db,'config','proxima_sesion'),snap=>{
+    if(snap.exists()){
+      const d=snap.data();
+      document.getElementById('r-sesion').innerHTML=`
+        <strong style="font-size:.95rem">${d.titulo||'Sin configurar'}</strong><br>
+        <span style="color:var(--mu)">${d.instructor||''} · ${d.fecha||''} · ${d.hora||''}</span>
+        ${d.enlace?`<br><a href="${d.enlace}" target="_blank" style="color:var(--pu);font-size:.82rem">Ver enlace ↗</a>`:''}`;
+      if(d.fechaExacta)startPreviewTimer(d.fechaExacta);
+    }
+  });
 }
+
+// MIEMBROS
+async function loadM(){/* cubierto por listener */}
 function rM(list){
   const tb=document.getElementById('mtb');
-  if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--mu)">Sin miembros</td></tr>';return;}
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--mu)">Sin miembros registrados</td></tr>';return;}
   tb.innerHTML=list.map(m=>{
     const ok=m.membresiaActiva||m.estado==='activo';
     const f=m.fechaRegistro?.toDate?m.fechaRegistro.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'—';
@@ -502,7 +726,7 @@ function rR(list){
 window.fM=q=>{const f=AM.filter(m=>(m.nombre||'').toLowerCase().includes(q.toLowerCase())||(m.email||'').toLowerCase().includes(q.toLowerCase()));rM(f);};
 window.tgM=async(uid,on)=>{
   try{await updateDoc(doc(db,'usuarios',uid),{membresiaActiva:on,estado:on?'activo':'inactivo'});
-    toast(on?'✅ Membresía activada':'⚠️ Membresía desactivada',on);loadM();}
+    toast(on?'✅ Membresía activada':'⚠️ Membresía desactivada',on);}
   catch{toast('❌ Error al actualizar');}
 };
 
@@ -511,26 +735,24 @@ const CN={endo:'Endocrinología',onco:'Oncología',hema:'Hematología',otro:'Otr
 const CI={endo:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/endocrinologia.png',
          onco:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/oncologia.png',
          hema:'https://teccapitalweb.github.io/globalvet-mexico/assets/img/cursos/hematologia.png'};
-async function loadV(){
-  try{const s=await getDocs(collection(db,'videos_club'));
-    AV=s.docs.map(d=>({id:d.id,...d.data()}));
-    document.getElementById('stv').textContent=AV.length;
-    document.getElementById('sbv').textContent=AV.length;
-    rV(AV);}catch{rV([]);}
-}
+async function loadV(){/* cubierto por listener */}
 function rV(list){
   const c=document.getElementById('vlist');
   if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Sin videos. Agrega el primero arriba.</div>';return;}
   c.innerHTML=list.map(v=>{
     const img=CI[v.categoria];
     return`<div class="vr">
-      ${img?`<div class="vt"><img src="${img}" alt=""></div>`:'<div class="vt-d">🎥</div>'}
+      ${img?`<div class="vt"><img src="${img}" onerror="this.parentElement.innerHTML='🎥'" alt=""></div>`:'<div class="vt-d">🎥</div>'}
       <div class="vi">
         <div class="vtit">${v.titulo||'—'}</div>
-        <div class="vme">${v.instructor||''} ${v.duracion?'· '+v.duracion:''} · <a href="https://youtu.be/${v.youtubeUrl}" target="_blank" style="color:var(--pu)">Ver ↗</a></div>
+        <div class="vme">${v.instructor||''} ${v.duracion?'· '+v.duracion:''} · <a href="https://youtu.be/${v.youtubeUrl}" target="_blank" style="color:var(--pu)">Ver video ↗</a></div>
+        ${v.temario?`<div class="vtm">📋 Temario:\n${v.temario}</div>`:''}
+        ${v.descripcion?`<div class="vtm" style="margin-top:.3rem;border-left-color:var(--gr)">ℹ️ ${v.descripcion}</div>`:''}
       </div>
       <span class="vc">${CN[v.categoria]||v.categoria||'—'}</span>
-      <button class="ab ab-del" onclick="dV('${v.id}')">🗑️ Eliminar</button>
+      <div class="vr-actions">
+        <button class="ab ab-del" onclick="dV('${v.id}')">🗑️ Eliminar</button>
+      </div>
     </div>`;
   }).join('');
 }
@@ -538,29 +760,90 @@ window.addV=async()=>{
   const t=document.getElementById('vt').value.trim(),u=document.getElementById('vu').value.trim();
   if(!t||!u){toast('⚠️ Título y URL son obligatorios');return;}
   let id=u;const m=u.match(/(?:youtu\.be\/|v=|\/embed\/)([a-zA-Z0-9_-]{11})/);if(m)id=m[1];
-  try{await addDoc(collection(db,'videos_club'),{
-    titulo:t,categoria:document.getElementById('vc').value,youtubeUrl:id,
-    instructor:document.getElementById('vi').value.trim(),
-    duracion:document.getElementById('vd').value.trim(),
-    etiqueta:document.getElementById('vtg').value,fechaSubida:serverTimestamp()});
-    toast('✅ Video agregado — visible para clientes en tiempo real',true);
-    ['vt','vu','vi','vd'].forEach(x=>document.getElementById(x).value='');
-    loadV();}
-  catch{toast('❌ Error al guardar');}
+  try{
+    await addDoc(collection(db,'videos_club'),{
+      titulo:t,categoria:document.getElementById('vc').value,youtubeUrl:id,
+      instructor:document.getElementById('vi').value.trim(),
+      duracion:document.getElementById('vd').value.trim(),
+      etiqueta:document.getElementById('vtg').value,
+      temario:document.getElementById('vtm').value.trim(),
+      descripcion:document.getElementById('vdesc').value.trim(),
+      fechaSubida:serverTimestamp()});
+    // Registrar actividad
+    await addDoc(collection(db,'actividad'),{tipo:'video',titulo:t,fecha:serverTimestamp()});
+    toast('✅ Video publicado — visible para miembros en tiempo real',true);
+    ['vt','vu','vi','vd','vtm','vdesc'].forEach(x=>document.getElementById(x).value='');
+  }catch(e){toast('❌ Error al guardar: '+e.message);}
 };
-window.dV=id=>confirm2('¿Eliminar este video de la biblioteca?',async()=>{
-  await deleteDoc(doc(db,'videos_club',id));toast('🗑️ Video eliminado');loadV();});
+window.dV=id=>confirm2('¿Eliminar este video de la biblioteca? Los miembros ya no podrán verlo.',async()=>{
+  await deleteDoc(doc(db,'videos_club',id));toast('🗑️ Video eliminado');});
+
+// PDFs
+async function loadP(){/* cubierto por listener */}
+function rP(list){
+  const c=document.getElementById('plist');
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Sin PDFs. Agrega el primero arriba.</div>';return;}
+  c.innerHTML=list.map(p=>
+    `<div class="pr">
+      <div class="pi">📄</div>
+      <div class="pt">
+        <div class="pt-n">${p.titulo||'—'}</div>
+        <div class="pt-m">${CN[p.categoria]||p.categoria||'—'} ${p.paginas?'· '+p.paginas:''} ${p.descripcion?'· '+p.descripcion:''}</div>
+        ${p.url?`<a href="${p.url}" target="_blank" style="font-size:.74rem;color:var(--pu)">Ver PDF ↗</a>`:''}
+      </div>
+      <button class="ab ab-del" onclick="dP('${p.id}')">🗑️ Eliminar</button>
+    </div>`
+  ).join('');
+}
+window.addP=async()=>{
+  const t=document.getElementById('pt').value.trim(),u=document.getElementById('pu').value.trim();
+  if(!t||!u){toast('⚠️ Título y enlace son obligatorios');return;}
+  try{
+    await addDoc(collection(db,'pdfs_club'),{
+      titulo:t,categoria:document.getElementById('pc').value,
+      url:u,paginas:document.getElementById('pp').value.trim(),
+      descripcion:document.getElementById('pdesc').value.trim(),
+      fechaSubida:serverTimestamp()});
+    await addDoc(collection(db,'actividad'),{tipo:'pdf',titulo:t,fecha:serverTimestamp()});
+    toast('✅ PDF publicado — disponible para miembros ahora',true);
+    ['pt','pu','pp','pdesc'].forEach(x=>document.getElementById(x).value='');
+  }catch(e){toast('❌ Error al guardar');}
+};
+window.dP=id=>confirm2('¿Eliminar este PDF? Los miembros ya no podrán descargarlo.',async()=>{
+  await deleteDoc(doc(db,'pdfs_club',id));toast('🗑️ PDF eliminado');});
+
+// ACTIVIDAD RECIENTE
+function rAct(videos,pdfs){
+  const c=document.getElementById('act-list');
+  const items=[
+    ...videos.map(v=>({...v,_tipo:'video',_fecha:v.fechaSubida})),
+    ...pdfs.map(p=>({...p,_tipo:'pdf',_fecha:p.fechaSubida}))
+  ].sort((a,b)=>{
+    const ta=a._fecha?.toDate?.()?.getTime()||0;
+    const tb=b._fecha?.toDate?.()?.getTime()||0;
+    return tb-ta;
+  }).slice(0,8);
+  if(!items.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Sin actividad reciente</div>';return;}
+  c.innerHTML=items.map(i=>{
+    const f=i._fecha?.toDate?i._fecha.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short'}):'—';
+    return`<div class="act-row">
+      <div class="act-ico" style="background:${i._tipo==='video'?'rgba(30,138,80,.12)':'rgba(79,53,179,.12)'}">${i._tipo==='video'?'🎬':'📄'}</div>
+      <div class="act-d">
+        <div class="act-n">${i.titulo||'—'}</div>
+        <div class="act-m">${i._tipo==='video'?'Video publicado':'PDF publicado'} · ${i.instructor||CN[i.categoria]||''}</div>
+      </div>
+      <div class="act-t">${f}</div>
+    </div>`;
+  }).join('');
+}
 
 // FEED
-const TM={video:'tv',pdf:'tp',live:'tl',nuevo:'tn'};
-const TL={video:'● Video',pdf:'● PDF',live:'● En vivo',nuevo:'Nuevo'};
-async function loadF(){
-  try{const s=await getDocs(collection(db,'feed_semanal'));
-    rF(s.docs.map(d=>({id:d.id,...d.data()})));}catch{rF([]);}
-}
+async function loadF(){/* cubierto por listener */}
 function rF(list){
   const c=document.getElementById('flist');
-  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Feed vacío.</div>';return;}
+  const TM={video:'tv',pdf:'tp',live:'tl',nuevo:'tn'};
+  const TL={video:'● Video',pdf:'● PDF',live:'● En vivo',nuevo:'✨ Nuevo'};
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Feed vacío — agrega contenido arriba.</div>';return;}
   c.innerHTML=list.map(f=>`<div class="fr">
     <span class="fd">${f.dia||'—'}</span>
     <div class="fc"><div class="ft">${f.titulo||'—'}</div><div class="fm">${f.meta||''}</div></div>
@@ -570,53 +853,108 @@ function rF(list){
 }
 window.addF=async()=>{
   const t=document.getElementById('ftt').value.trim();
-  if(!t){toast('⚠️ Escribe el título');return;}
+  if(!t){toast('⚠️ Escribe el título del contenido');return;}
   try{await addDoc(collection(db,'feed_semanal'),{
     dia:document.getElementById('fd').value,tipo:document.getElementById('ftp').value,
     titulo:t,meta:document.getElementById('fm').value.trim(),creado:serverTimestamp()});
-    toast('✅ Agregado al feed — visible para clientes ahora',true);
-    document.getElementById('ftt').value='';document.getElementById('fm').value='';
-    loadF();}
+    toast('✅ Agregado al feed — visible para miembros ahora',true);
+    document.getElementById('ftt').value='';document.getElementById('fm').value='';}
   catch{toast('❌ Error');}
 };
-window.dF=id=>confirm2('¿Eliminar este ítem del feed?',async()=>{
-  await deleteDoc(doc(db,'feed_semanal',id));toast('🗑️ Eliminado');loadF();});
-window.clrF=()=>confirm2('¿Limpiar todo el feed de esta semana?',async()=>{
+window.dF=id=>confirm2('¿Eliminar este ítem del feed semanal?',async()=>{
+  await deleteDoc(doc(db,'feed_semanal',id));toast('🗑️ Eliminado');});
+window.clrF=()=>confirm2('¿Limpiar todo el feed de esta semana? Esta acción no se puede deshacer.',async()=>{
   const s=await getDocs(collection(db,'feed_semanal'));
   await Promise.all(s.docs.map(d=>deleteDoc(d.ref)));
-  toast('✅ Feed limpiado',true);loadF();});
+  toast('✅ Feed limpiado',true);});
 
-// SESION
-async function loadS(){
-  try{const s=await getDoc(doc(db,'config','proxima_sesion'));
-    if(s.exists()){const d=s.data();
-      document.getElementById('st').value=d.titulo||'';
-      document.getElementById('si').value=d.instructor||'';
-      document.getElementById('sf').value=d.fecha||'';
-      document.getElementById('sh').value=d.hora||'';
-      if(d.fechaExacta)document.getElementById('se').value=d.fechaExacta;
-      updPrev(d.titulo,d.instructor,d.fecha,d.hora);}}catch{}
+// SESIÓN
+async function loadS(){/* cubierto por listener */}
+function startPreviewTimer(fechaExacta){
+  clearInterval(window._pvTimer);
+  window._pvTimer=setInterval(()=>{
+    const diff=new Date(fechaExacta)-new Date();
+    if(diff<=0){
+      ['pv-dd','pv-hh','pv-mm','pv-ss'].forEach(id=>document.getElementById(id).textContent='00');
+      clearInterval(window._pvTimer);return;
+    }
+    document.getElementById('pv-dd').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('pv-hh').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+    document.getElementById('pv-mm').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+    document.getElementById('pv-ss').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+  },1000);
 }
+window.saveS=async()=>{
+  const t=document.getElementById('st').value.trim();
+  if(!t){toast('⚠️ Escribe el título de la sesión');return;}
+  const fe=document.getElementById('se').value;
+  try{
+    await setDoc(doc(db,'config','proxima_sesion'),{
+      titulo:t,instructor:document.getElementById('si').value.trim(),
+      fecha:document.getElementById('sf').value.trim(),hora:document.getElementById('sh').value.trim(),
+      enlace:document.getElementById('sl').value.trim(),
+      fechaExacta:fe,actualizado:serverTimestamp()});
+    toast('✅ Sesión guardada — cronómetro actualizado en tiempo real',true);
+    if(fe)startPreviewTimer(fe);
+    updPrev(t,document.getElementById('si').value,document.getElementById('sf').value,document.getElementById('sh').value);
+  }catch{toast('❌ Error al guardar');}
+};
 function updPrev(t,i,f,h){
   document.getElementById('lpt').textContent=t||'Título de la sesión';
   document.getElementById('lpm').textContent=`${i||'Instructor'} · ${f||'Fecha'} · ${h||'Hora'}`;
 }
-window.saveS=async()=>{
-  const t=document.getElementById('st').value.trim();
-  if(!t){toast('⚠️ Escribe el título');return;}
-  try{await setDoc(doc(db,'config','proxima_sesion'),{
-    titulo:t,instructor:document.getElementById('si').value.trim(),
-    fecha:document.getElementById('sf').value.trim(),hora:document.getElementById('sh').value.trim(),
-    fechaExacta:document.getElementById('se').value,actualizado:serverTimestamp()});
-    toast('✅ Sesión guardada — el cronómetro se actualiza en tiempo real',true);
-    updPrev(t,document.getElementById('si').value,document.getElementById('sf').value,document.getElementById('sh').value);}
-  catch{toast('❌ Error al guardar');}
-};
 ['st','si','sf','sh'].forEach(id=>document.getElementById(id)?.addEventListener('input',()=>
   updPrev(document.getElementById('st').value,document.getElementById('si').value,
           document.getElementById('sf').value,document.getElementById('sh').value)));
 
-// CONFIRM MODAL
+// NOTIFICACIONES
+async function loadN(){
+  try{
+    const s=await getDocs(collection(db,'notificaciones'));
+    rNList(s.docs.map(d=>({id:d.id,...d.data()})));
+  }catch{}
+}
+function rNList(list){
+  const c=document.getElementById('nlist');
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:2rem;color:var(--mu)">Sin notificaciones enviadas aún</div>';return;}
+  c.innerHTML=list.map(n=>{
+    const f=n.fecha?.toDate?n.fecha.toDate().toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+    return`<div class="act-row">
+      <div class="act-ico" style="background:rgba(79,53,179,.1)">📧</div>
+      <div class="act-d">
+        <div class="act-n">${n.asunto||'—'}</div>
+        <div class="act-m">Enviado a ${n.destinatarios||'—'} miembros · ${n.tipo||'general'}</div>
+      </div>
+      <div class="act-t">${f}</div>
+    </div>`;
+  }).join('');
+}
+window.sendNotif=async()=>{
+  const s=document.getElementById('ns').value.trim();
+  const m=document.getElementById('nm').value.trim();
+  if(!s||!m){toast('⚠️ Asunto y mensaje son obligatorios');return;}
+  const activos=AM.filter(x=>x.membresiaActiva||x.estado==='activo');
+  if(!activos.length){toast('⚠️ No hay miembros activos a quién notificar');return;}
+
+  confirm2(`¿Enviar notificación a ${activos.length} miembro(s) activo(s)?`,async()=>{
+    try{
+      // Guarda en Firestore — en producción conectar Cloud Functions para envío real
+      const nRef=await addDoc(collection(db,'notificaciones'),{
+        asunto:s,mensaje:m,tipo:document.getElementById('ntp').value,
+        contenido:document.getElementById('nct').value.trim(),
+        destinatarios:activos.length,
+        emails:activos.map(x=>x.email).filter(Boolean),
+        fecha:serverTimestamp()});
+      toast(`✅ Notificación registrada para ${activos.length} miembros`,true);
+      document.getElementById('ns').value='';
+      document.getElementById('nm').value='';
+      document.getElementById('nct').value='';
+      loadN();
+    }catch{toast('❌ Error al guardar notificación');}
+  });
+};
+
+// MODAL
 let PA=null;
 function confirm2(msg,cb){document.getElementById('moMsg').textContent=msg;PA=cb;document.getElementById('mo').classList.add('show');}
 window.cmo=()=>{document.getElementById('mo').classList.remove('show');PA=null;};
